@@ -1,11 +1,11 @@
-package com.example.munchies;
+package com.example.munchies.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "restaurant")
-public class Restaurant {
+public class RestaurantEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restaurant_id")
@@ -21,7 +21,7 @@ public class Restaurant {
     private LocalDateTime restaurantCreated;
     private LocalDateTime restaurantUpdated;
 
-    public Restaurant() {
+    public RestaurantEntity() {
     }
 
     public int getRestaurantID() {

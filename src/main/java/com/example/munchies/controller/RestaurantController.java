@@ -1,5 +1,7 @@
-package com.example.munchies;
+package com.example.munchies.controller;
 
+import com.example.munchies.repository.RestaurantRepository;
+import com.example.munchies.model.entity.RestaurantEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,18 +20,18 @@ public class RestaurantController {
                                                  @RequestParam String restaurantAddress,
                                                  @RequestParam String restaurantPhoneNumber,
                                                  @RequestParam String restaurantMenuUrl) {
-        Restaurant restaurant = new Restaurant();
-        restaurant.setRestaurantName(restaurantName);
-        restaurant.setRestaurantAddress(restaurantAddress);
-        restaurant.setRestaurantPhoneNumber(restaurantPhoneNumber);
-        restaurant.setRestaurantMenuUrl(restaurantMenuUrl);
-        restaurant.setRestaurantCreated(LocalDateTime.now());
-        restaurantRepository.save(restaurant);
+        RestaurantEntity restaurantEntity = new RestaurantEntity();
+        restaurantEntity.setRestaurantName(restaurantName);
+        restaurantEntity.setRestaurantAddress(restaurantAddress);
+        restaurantEntity.setRestaurantPhoneNumber(restaurantPhoneNumber);
+        restaurantEntity.setRestaurantMenuUrl(restaurantMenuUrl);
+        restaurantEntity.setRestaurantCreated(LocalDateTime.now());
+        restaurantRepository.save(restaurantEntity);
         return "Restaurant Created";
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Restaurant> getAllRestaurants(){
+    public @ResponseBody Iterable<RestaurantEntity> getAllRestaurants(){
         return restaurantRepository.findAll();
     }
 }
