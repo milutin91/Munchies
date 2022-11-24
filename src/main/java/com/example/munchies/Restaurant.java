@@ -8,13 +8,18 @@ import java.time.LocalDateTime;
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "restaurant_id")
     private int restaurantID;
+    @Column(name = "restaurant_name")
     private String restaurantName;
+    @Column(name = "restaurant_address")
     private String restaurantAddress;
+    @Column(name = "restaurant_phone_number")
     private String restaurantPhoneNumber;
+    @Column(name = "restaurant_menu_url")
     private String restaurantMenuUrl;
-    private LocalDateTime deliveryInfoCreated;
-    private LocalDateTime deliveryInfoUpdated;
+    private LocalDateTime restaurantCreated;
+    private LocalDateTime restaurantUpdated;
 
     public Restaurant() {
     }
@@ -59,20 +64,20 @@ public class Restaurant {
         this.restaurantMenuUrl = restaurantMenuUrl;
     }
 
-    public LocalDateTime getDeliveryInfoCreated() {
-        return deliveryInfoCreated;
+    public LocalDateTime getRestaurantCreated() {
+        return restaurantCreated;
     }
 
-    public void setDeliveryInfoCreated(LocalDateTime deliveryInfoCreated) {
-        this.deliveryInfoCreated = deliveryInfoCreated;
+    public void setRestaurantCreated(LocalDateTime restaurantCreated) {
+        this.restaurantCreated = restaurantCreated;
     }
 
-    public LocalDateTime getDeliveryInfoUpdated() {
-        return deliveryInfoUpdated;
+    public LocalDateTime getRestaurantUpdated() {
+        return restaurantUpdated;
     }
 
-    public void setDeliveryInfoUpdated(LocalDateTime deliveryInfoUpdated) {
-        this.deliveryInfoUpdated = deliveryInfoUpdated;
+    public void setRestaurantUpdated(LocalDateTime restaurantUpdated) {
+        this.restaurantUpdated = restaurantUpdated;
     }
 
     @Override
@@ -83,8 +88,8 @@ public class Restaurant {
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantPhoneNumber='" + restaurantPhoneNumber + '\'' +
                 ", restaurantMenuUrl='" + restaurantMenuUrl + '\'' +
-                ", deliveryInfoCreated=" + deliveryInfoCreated +
-                ", deliveryInfoUpdated=" + deliveryInfoUpdated +
+                ", deliveryInfoCreated=" + restaurantCreated +
+                ", deliveryInfoUpdated=" + restaurantUpdated +
                 '}';
     }
 }
