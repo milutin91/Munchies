@@ -2,6 +2,7 @@ package com.example.munchies.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "restaurant")
@@ -20,6 +21,12 @@ public class RestaurantEntity {
     private String restaurantMenuUrl;
     private LocalDateTime restaurantCreated;
     private LocalDateTime restaurantUpdated;
+
+    @OneToOne(mappedBy = "restaurantEntity", cascade = CascadeType.ALL)
+    private DeliveryInfoEntity deliveryInfoEntity;
+
+    @OneToMany(mappedBy = "restaurantEntity")
+    private List<GroupOrderEntity> groupOrders;
 
     public RestaurantEntity() {
     }

@@ -4,6 +4,7 @@ import com.example.munchies.model.Enum.EmployeeRole;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -26,6 +27,12 @@ public class EmployeeEntity {
     private LocalDateTime employeeCreated;
     @Column(name = "employee_updated")
     private LocalDateTime employeeUpdated;
+
+    @OneToMany(mappedBy = "employeeEntity")
+    private List<GroupOrderEntity> groupOrders;
+
+    @OneToMany(mappedBy = "employeeEntity")
+    private List<OrderItemEntity> orderItems;
 
     public EmployeeEntity() {
     }

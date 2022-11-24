@@ -1,0 +1,81 @@
+package com.example.munchies.model.entity;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "delivery_info")
+public class DeliveryInfoEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "delivery_info_id")
+    private int deliveryInfoID;
+    @Column(name = "delivery_info_time")
+    private LocalDateTime deliveryInfoTime;
+    @Column(name = "delivery_info_additional_charges")
+    private double deliveryInfoAdditionalCharges;
+    @Column(name = "delivery_info_created")
+    private LocalDateTime deliveryInfoCreated;
+    @Column(name = "delivery_info_updated")
+    private LocalDateTime deliveryInfoUpdated;
+
+    @OneToOne
+    @JoinColumn(name = "restaurant_id")
+    private RestaurantEntity restaurantEntity;
+
+    public DeliveryInfoEntity() {
+    }
+
+    public int getDeliveryInfoID() {
+        return deliveryInfoID;
+    }
+
+    public void setDeliveryInfoID(int deliveryInfoID) {
+        this.deliveryInfoID = deliveryInfoID;
+    }
+
+
+    public LocalDateTime getDeliveryInfoTime() {
+        return deliveryInfoTime;
+    }
+
+    public void setDeliveryInfoTime(LocalDateTime deliveryInfoTime) {
+        this.deliveryInfoTime = deliveryInfoTime;
+    }
+
+    public double getDeliveryInfoAdditionalCharges() {
+        return deliveryInfoAdditionalCharges;
+    }
+
+    public void setDeliveryInfoAdditionalCharges(double deliveryInfoAdditionalCharges) {
+        this.deliveryInfoAdditionalCharges = deliveryInfoAdditionalCharges;
+    }
+
+    public LocalDateTime getDeliveryInfoCreated() {
+        return deliveryInfoCreated;
+    }
+
+    public void setDeliveryInfoCreated(LocalDateTime deliveryInfoCreated) {
+        this.deliveryInfoCreated = deliveryInfoCreated;
+    }
+
+    public LocalDateTime getDeliveryInfoUpdated() {
+        return deliveryInfoUpdated;
+    }
+
+    public void setDeliveryInfoUpdated(LocalDateTime deliveryInfoUpdated) {
+        this.deliveryInfoUpdated = deliveryInfoUpdated;
+    }
+
+    @Override
+    public String toString() {
+        return "DeliveryInfoEntity{" +
+                "deliveryInfoID=" + deliveryInfoID +
+                ", deliveryInfoTime=" + deliveryInfoTime +
+                ", deliveryInfoAdditionalCharges=" + deliveryInfoAdditionalCharges +
+                ", deliveryInfoCreated=" + deliveryInfoCreated +
+                ", deliveryInfoUpdated=" + deliveryInfoUpdated +
+                ", restaurantEntity=" + restaurantEntity +
+                '}';
+    }
+}
