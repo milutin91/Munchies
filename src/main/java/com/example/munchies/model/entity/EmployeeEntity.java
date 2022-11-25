@@ -1,7 +1,5 @@
 package com.example.munchies.model.entity;
 
-import com.example.munchies.model.Enum.EmployeeRole;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
