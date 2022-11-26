@@ -20,6 +20,7 @@ public class EmployeeEntity {
     @Column(name = "employee_password")
     private String employeePassword;
     @Column(name = "employee_role")
+    @Enumerated(EnumType.STRING)
     private EmployeeRole employeeRole;
     @Column(name = "employee_created")
     private LocalDateTime employeeCreated;
