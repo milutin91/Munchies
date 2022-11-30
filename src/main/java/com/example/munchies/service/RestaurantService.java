@@ -1,6 +1,7 @@
 package com.example.munchies.service;
 
 import com.example.munchies.model.dto.NewRestaurantDTO;
+import com.example.munchies.model.dto.RestaurantDetailsDTO;
 import com.example.munchies.model.dto.RestaurantViewDTO;
 import com.example.munchies.model.entity.DeliveryInfoEntity;
 import com.example.munchies.model.entity.RestaurantEntity;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestaurantService {
@@ -49,6 +51,20 @@ public class RestaurantService {
             restaurantViewDTOS.add(mapToDTO(restaurant));
         }
         return restaurantViewDTOS;
+    }
+
+    public RestaurantDetailsDTO findRestaurantDetails(Integer id){
+        RestaurantDetailsDTO restaurantDetailsDTO = new RestaurantDetailsDTO();
+        RestaurantEntity restaurant = restaurantRepository.findById(id).get();
+        DeliveryInfoEntity deliveryInfo = deliveryInfoRepository.findDeliveryInfoEntityByRestaurantEntity(restaurant);
+        restaurantDetailsDTO.setRestaurantName(restaurant.getRestaurantName());
+        restaurantDetailsDTO.setRestaurantShortName(restaurant.getRestaurantShortName());
+        restaurantDetailsDTO.setRestaurantAddress(restaurant.getRestaurantAddress());
+        restaurantDetailsDTO.setRestaurantPhoneNumber(restaurant.getRestaurantPhoneNumber());
+        restaurantDetailsDTO.setRestaurantMenuUrl(restaurant.getRestaurantMenuUrl());
+        restaurantDetailsDTO.setDeliveryInfoTime(deliveryInfo.getDeliveryInfoTime());
+        restaurantDetailsDTO.setDeliveryInfoAdditionalCharges(deliveryInfo.getDeliveryInfoAdditionalCharges());
+        return restaurantDetailsDTO;
     }
 
     private RestaurantViewDTO mapToDTO(RestaurantEntity restaurant){

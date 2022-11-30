@@ -1,12 +1,13 @@
 package com.example.munchies.controller;
 
 import com.example.munchies.model.dto.NewRestaurantDTO;
+import com.example.munchies.model.dto.RestaurantDetailsDTO;
 import com.example.munchies.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -33,4 +34,12 @@ public class RestaurantController {
         model.addAttribute("restaurants", restaurantService.getAllRestaurants());
         return "restaurants";
     }
+
+    @GetMapping("/restaurant-details/{id}")
+    public String getRestaurantDetails(@PathVariable("id") Integer id, Model model){
+        RestaurantDetailsDTO restaurantDetailsDTO = restaurantService.findRestaurantDetails(id);
+        model.addAttribute("restaurantDetails", restaurantDetailsDTO);
+        return "restaurant_details";
+    }
+
 }

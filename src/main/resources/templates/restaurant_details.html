@@ -5,16 +5,30 @@
     <title>Munchies</title>
 </head>
 <body>
-  <table>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </table>
+<div align="center">
+    <h1>Restaurant Details</h1>
+    <br>
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td>Short Name</td>
+            <td>Address</td>
+            <td>Phone</td>
+            <td>Menu URL</td>
+            <td>Delivery Time</td>
+            <td>Additional Charges</td>
+
+        </tr>
+        <tr>
+            <td th:text="${restaurantDetails.restaurantName}"></td>
+            <td th:text="${restaurantDetails.restaurantShortName}"></td>
+            <td th:text="${restaurantDetails.restaurantAddress}"></td>
+            <td th:text="${restaurantDetails.restaurantPhoneNumber}"></td>
+            <td th:text="${restaurantDetails.restaurantMenuUrl}"></td>
+            <td th:text="${restaurantDetails.deliveryInfoTime}"></td>
+            <td th:text="${restaurantDetails.deliveryInfoAdditionalCharges}"></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

@@ -16,6 +16,7 @@
         <td>Address</td>
         <td>Phone</td>
         <td>Menu URL</td>
+        <td>Details</td>
       </tr>
       <tr th:each="restaurant : ${restaurants}">
         <td th:text="${restaurant.restaurantName}"></td>
@@ -23,6 +24,7 @@
         <td th:text="${restaurant.restaurantAddress}"></td>
         <td th:text="${restaurant.restaurantPhoneNumber}"></td>
         <td th:text="${restaurant.restaurantMenuUrl}"></td>
+        <td><a href="#" th:href="@{'/restaurant-details/'+${restaurant.restaurantID}}">View Details</a> </td>
       </tr>
     </table>
   </div>
