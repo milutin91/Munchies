@@ -11,7 +11,7 @@ public class DeliveryInfoEntity {
     @Column(name = "delivery_info_id")
     private int deliveryInfoID;
     @Column(name = "delivery_info_time")
-    private LocalDateTime deliveryInfoTime;
+    private int deliveryInfoTime;
     @Column(name = "delivery_info_additional_charges")
     private double deliveryInfoAdditionalCharges;
     @Column(name = "delivery_info_created")
@@ -35,11 +35,11 @@ public class DeliveryInfoEntity {
     }
 
 
-    public LocalDateTime getDeliveryInfoTime() {
+    public int getDeliveryInfoTime() {
         return deliveryInfoTime;
     }
 
-    public void setDeliveryInfoTime(LocalDateTime deliveryInfoTime) {
+    public void setDeliveryInfoTime(int deliveryInfoTime) {
         this.deliveryInfoTime = deliveryInfoTime;
     }
 
@@ -65,6 +65,14 @@ public class DeliveryInfoEntity {
 
     public void setDeliveryInfoUpdated(LocalDateTime deliveryInfoUpdated) {
         this.deliveryInfoUpdated = deliveryInfoUpdated;
+    }
+
+    public RestaurantEntity getRestaurantEntity() {
+        return restaurantEntity;
+    }
+
+    public void setRestaurantEntity(RestaurantEntity restaurantEntity) {
+        this.restaurantEntity = restaurantEntity;
     }
 
     @Override

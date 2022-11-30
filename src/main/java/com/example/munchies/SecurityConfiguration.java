@@ -31,17 +31,30 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/employee")
-                .hasAuthority("USER")
-                .antMatchers("/admin")
-                .hasAuthority("ADMIN")
-                .antMatchers("/")
-                .permitAll()
+        http
+//                .formLogin()
+//                .loginPage("/")
+//                .failureUrl("/login-error.html")
+//                .and()
+//                .logout()
+//                .logoutSuccessUrl("/index.html").and()
+//                .antMatchers("/employee")
+//                .hasAuthority("USER")
+//                .antMatchers("/admin")
+//                .hasAuthority("ADMIN")
+//                .antMatchers("/")
+//                .permitAll()
+        .authorizeRequests()
                 .anyRequest()
                 .authenticated()
                 .and()
+                .formLogin()
+                .loginPage("/login")
+//                .defaultSuccessUrl("/index")
+                .permitAll()
+                .and()
                 .httpBasic();
+        http.csrf().disable();
         return  http.build();
     }
 }

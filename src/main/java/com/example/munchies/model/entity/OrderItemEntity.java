@@ -80,6 +80,22 @@ public class OrderItemEntity {
         this.orderItemUpdated = orderItemUpdated;
     }
 
+    public EmployeeEntity getEmployeeEntity() {
+        return employeeEntity;
+    }
+
+    public void setEmployeeEntity(EmployeeEntity employeeEntity) {
+        this.employeeEntity = employeeEntity;
+    }
+
+    public GroupOrderEntity getGroupOrderEntity() {
+        return groupOrderEntity;
+    }
+
+    public void setGroupOrderEntity(GroupOrderEntity groupOrderEntity) {
+        this.groupOrderEntity = groupOrderEntity;
+    }
+
     @Override
     public String toString() {
         return "OrderItemEntity{" +
