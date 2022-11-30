@@ -1,16 +1,13 @@
 package com.example.munchies.controller;
 
 import com.example.munchies.model.dto.NewRestaurantDTO;
-import com.example.munchies.repository.RestaurantRepository;
-import com.example.munchies.model.entity.RestaurantEntity;
 import com.example.munchies.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 
@@ -20,17 +17,20 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping("/restaurant/add")
-    public String addNewRestaurant(@ModelAttribute NewRestaurantDTO restaurantDTO, Model model) {
+    public String addNewRestaurant(NewRestaurantDTO restaurantDTO, Model model) {
         model.addAttribute("newRestaurant", restaurantDTO);
+        return "add_restaurant";
+    }
+
+    @PostMapping("/restaurant/save")
+    public String saveRestaurant(NewRestaurantDTO restaurantDTO){
         restaurantService.addRestaurant(restaurantDTO);
-
-        return "/restaurant/add";
-
+        return "redirect:/restaurant/all";
     }
 
     @GetMapping("/restaurant/all")
     public String getAllRestaurants(Model model){
         model.addAttribute("restaurants", restaurantService.getAllRestaurants());
-        return "/restaurants/add";
+        return "restaurants";
     }
 }

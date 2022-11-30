@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Add Restaurant</h1>
-  <form action="#" th:action="@{/restaurant/add}" th:object="${newRestaurant}" method="post">
+  <form action="#" th:action="@{/restaurant/save}" method="post">
     <label for="restaurantName">Restaurant name</label>:
     <input type="text" th:field="*{newRestaurant.restaurantName}" id="restaurantName" name="restaurantName">
     <br>

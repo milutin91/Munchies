@@ -50,7 +50,7 @@ public class SecurityConfiguration {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-//                .defaultSuccessUrl("/index")
+                .defaultSuccessUrl("/index", true)
                 .permitAll()
                 .and()
                 .httpBasic();

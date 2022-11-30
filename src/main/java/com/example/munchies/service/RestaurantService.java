@@ -26,13 +26,6 @@ public class RestaurantService {
     private ModelMapper modelMapper;
 
     public String addRestaurant(NewRestaurantDTO restaurantDTO) {
-//        if(!restaurantRepository.existsByRestaurantName(mapToDTO(restaurant).getRestaurantName())){
-//            restaurant.setRestaurantCreated(LocalDateTime.now());
-//            restaurantRepository.save(restaurant);
-//            return "Restaurant created";
-//        }else{
-//            return "Restaurant already exist!";
-//        }
         RestaurantEntity restaurant = new RestaurantEntity();
         DeliveryInfoEntity deliveryInfo = new DeliveryInfoEntity();
         restaurant.setRestaurantName(restaurantDTO.getRestaurantName());
@@ -43,6 +36,8 @@ public class RestaurantService {
         restaurantRepository.save(restaurant);
         deliveryInfo.setDeliveryInfoTime(restaurantDTO.getDeliveryInfoTime());
         deliveryInfo.setDeliveryInfoAdditionalCharges(restaurantDTO.getDeliveryInfoAdditionalCharges());
+        deliveryInfo.setRestaurantEntity(restaurant);
+        deliveryInfo.setDeliveryInfoCreated(LocalDateTime.now());
         deliveryInfoRepository.save(deliveryInfo);
         return "new restaurant created";
     }
