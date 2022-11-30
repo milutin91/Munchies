@@ -1,19 +1,17 @@
 package com.example.munchies.service;
 
 import com.example.munchies.model.dto.NewRestaurantDTO;
+import com.example.munchies.model.dto.RestaurantViewDTO;
 import com.example.munchies.model.entity.DeliveryInfoEntity;
 import com.example.munchies.model.entity.RestaurantEntity;
 import com.example.munchies.repository.DeliveryInfoRepository;
 import com.example.munchies.repository.RestaurantRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,6 +31,8 @@ public class RestaurantService {
         restaurant.setRestaurantPhoneNumber(restaurantDTO.getRestaurantPhoneNumber());
         restaurant.setRestaurantMenuUrl(restaurantDTO.getRestaurantMenuUrl());
         restaurant.setRestaurantCreated(LocalDateTime.now());
+        String shortName = restaurantDTO.getRestaurantName().replaceAll(" ", "_");
+        restaurant.setRestaurantShortName(shortName);
         restaurantRepository.save(restaurant);
         deliveryInfo.setDeliveryInfoTime(restaurantDTO.getDeliveryInfoTime());
         deliveryInfo.setDeliveryInfoAdditionalCharges(restaurantDTO.getDeliveryInfoAdditionalCharges());
@@ -42,17 +42,22 @@ public class RestaurantService {
         return "new restaurant created";
     }
 
-    public List<RestaurantEntity> getAllRestaurants(){
-        return restaurantRepository.findAll();
+    public List<RestaurantViewDTO> getAllRestaurants(){
+        List<RestaurantEntity> restaurants = restaurantRepository.findAll();
+        List<RestaurantViewDTO> restaurantViewDTOS = new ArrayList<>();
+        for (var restaurant : restaurants){
+            restaurantViewDTOS.add(mapToDTO(restaurant));
+        }
+        return restaurantViewDTOS;
     }
 
-    private NewRestaurantDTO mapToDTO(RestaurantEntity restaurant){
-        NewRestaurantDTO newRestaurantDTO = modelMapper.map(restaurant, NewRestaurantDTO.class);
-        return newRestaurantDTO;
+    private RestaurantViewDTO mapToDTO(RestaurantEntity restaurant){
+        RestaurantViewDTO restaurantViewDTO = modelMapper.map(restaurant, RestaurantViewDTO.class);
+        return restaurantViewDTO;
     }
 
-    private RestaurantEntity mapToEntity(NewRestaurantDTO restaurantDTO){
-        RestaurantEntity restaurant = modelMapper.map(restaurantDTO, RestaurantEntity.class);
+    private RestaurantEntity mapToEntity(RestaurantViewDTO restaurantViewDTO){
+        RestaurantEntity restaurant = modelMapper.map(restaurantViewDTO, RestaurantEntity.class);
         return restaurant;
     }
 }

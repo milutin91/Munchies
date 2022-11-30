@@ -13,6 +13,8 @@ public class RestaurantEntity {
     private int restaurantID;
     @Column(name = "restaurant_name")
     private String restaurantName;
+    @Column(name = "restaurant_short_name")
+    private String restaurantShortName;
     @Column(name = "restaurant_address")
     private String restaurantAddress;
     @Column(name = "restaurant_phone_number")
@@ -85,6 +87,14 @@ public class RestaurantEntity {
 
     public void setRestaurantUpdated(LocalDateTime restaurantUpdated) {
         this.restaurantUpdated = restaurantUpdated;
+    }
+
+    public String getRestaurantShortName() {
+        return restaurantShortName;
+    }
+
+    public void setRestaurantShortName(String restaurantShortName) {
+        this.restaurantShortName = restaurantShortName;
     }
 
     public DeliveryInfoEntity getDeliveryInfoEntity() {
