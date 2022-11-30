@@ -87,6 +87,22 @@ public class RestaurantEntity {
         this.restaurantUpdated = restaurantUpdated;
     }
 
+    public DeliveryInfoEntity getDeliveryInfoEntity() {
+        return deliveryInfoEntity;
+    }
+
+    public void setDeliveryInfoEntity(DeliveryInfoEntity deliveryInfoEntity) {
+        this.deliveryInfoEntity = deliveryInfoEntity;
+    }
+
+    public List<GroupOrderEntity> getGroupOrders() {
+        return groupOrders;
+    }
+
+    public void setGroupOrders(List<GroupOrderEntity> groupOrders) {
+        this.groupOrders = groupOrders;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +

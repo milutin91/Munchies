@@ -1,6 +1,8 @@
 package com.example.munchies.controller;
 
+import com.example.munchies.model.entity.EmployeeEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,8 +18,8 @@ public class EmployeeController {
         return "This is Admin Page";
     }
 
-    @GetMapping("/")
-    public String home(){
-        return "Home";
-    }
+//    @GetMapping("/")
+//    public String home(){
+//        return "Home";
+//    }
 }

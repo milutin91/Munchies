@@ -100,6 +100,22 @@ public class EmployeeEntity {
         this.employeeUpdated = employeeUpdated;
     }
 
+    public List<GroupOrderEntity> getGroupOrders() {
+        return groupOrders;
+    }
+
+    public void setGroupOrders(List<GroupOrderEntity> groupOrders) {
+        this.groupOrders = groupOrders;
+    }
+
+    public List<OrderItemEntity> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItemEntity> orderItems) {
+        this.orderItems = orderItems;
+    }
+
     @Override
     public String toString() {
         return "EmployeeEntity{" +
