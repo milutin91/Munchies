@@ -1,4 +1,4 @@
-package com.example.munchies;
+package com.example.munchies.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,20 +31,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-//                .formLogin()
-//                .loginPage("/")
-//                .failureUrl("/login-error.html")
-//                .and()
-//                .logout()
-//                .logoutSuccessUrl("/index.html").and()
-//                .antMatchers("/employee")
-//                .hasAuthority("USER")
-//                .antMatchers("/admin")
-//                .hasAuthority("ADMIN")
-//                .antMatchers("/")
-//                .permitAll()
-        .authorizeRequests()
+        http.authorizeRequests()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -55,6 +42,6 @@ public class SecurityConfiguration {
                 .and()
                 .httpBasic();
         http.csrf().disable();
-        return  http.build();
+        return http.build();
     }
 }
