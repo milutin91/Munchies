@@ -1,15 +1,17 @@
 package com.example.munchies.model.dto;
 
-public class NewOrUpdateRestaurantDTO {
+public class RestaurantDetailsDTO {
+
+    private int restaurantID;
     private String restaurantName;
+    private String restaurantShortName;
     private String restaurantAddress;
     private String restaurantPhoneNumber;
     private String restaurantMenuUrl;
     private DeliveryInfoDTO deliveryInfoDTO;
 
-    public NewOrUpdateRestaurantDTO() {
+    public RestaurantDetailsDTO() {
     }
-
 
     public String getRestaurantName() {
         return restaurantName;
@@ -17,6 +19,14 @@ public class NewOrUpdateRestaurantDTO {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
+    }
+
+    public String getRestaurantShortName() {
+        return restaurantShortName;
+    }
+
+    public void setRestaurantShortName(String restaurantShortName) {
+        this.restaurantShortName = restaurantShortName;
     }
 
     public String getRestaurantAddress() {
@@ -35,14 +45,6 @@ public class NewOrUpdateRestaurantDTO {
         this.restaurantPhoneNumber = restaurantPhoneNumber;
     }
 
-    public DeliveryInfoDTO getDeliveryInfoDTO() {
-        return deliveryInfoDTO;
-    }
-
-    public void setDeliveryInfoDTO(DeliveryInfoDTO deliveryInfoDTO) {
-        this.deliveryInfoDTO = deliveryInfoDTO;
-    }
-
     public String getRestaurantMenuUrl() {
         return restaurantMenuUrl;
     }
@@ -52,10 +54,27 @@ public class NewOrUpdateRestaurantDTO {
     }
 
 
+    public DeliveryInfoDTO getDeliveryInfoDTO() {
+        return deliveryInfoDTO;
+    }
+
+    public void setDeliveryInfoDTO(DeliveryInfoDTO deliveryInfoDTO) {
+        this.deliveryInfoDTO = deliveryInfoDTO;
+    }
+
+    public int getRestaurantID() {
+        return restaurantID;
+    }
+
+    public void setRestaurantID(int restaurantID) {
+        this.restaurantID = restaurantID;
+    }
+
     @Override
     public String toString() {
-        return "NewRestaurantDTO{" +
+        return "RestaurantDetailsDTO{" +
                 "restaurantName='" + restaurantName + '\'' +
+                ", restaurantShortName='" + restaurantShortName + '\'' +
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantPhoneNumber='" + restaurantPhoneNumber + '\'' +
                 ", restaurantMenuUrl='" + restaurantMenuUrl + '\'' +
