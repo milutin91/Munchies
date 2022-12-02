@@ -19,11 +19,12 @@ public class DeliveryInfoEntity {
     @Column(name = "delivery_info_updated")
     private LocalDateTime deliveryInfoUpdated;
 
-    @OneToOne
-    @JoinColumn(name = "restaurant_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id", referencedColumnName = "restaurant_id")
     private RestaurantEntity restaurantEntity;
 
     public DeliveryInfoEntity() {
+        this.deliveryInfoCreated = LocalDateTime.now();
     }
 
     public int getDeliveryInfoID() {
