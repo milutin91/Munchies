@@ -11,22 +11,20 @@
     <br>
     <table border="1">
       <tr>
-        <td>ID</td>
         <td>Name</td>
+        <td>Short Name</td>
         <td>Address</td>
         <td>Phone</td>
         <td>Menu URL</td>
-        <td>Created</td>
-        <td>Updated</td>
+        <td>Details</td>
       </tr>
       <tr th:each="restaurant : ${restaurants}">
-        <td th:text="${restaurant.restaurantID}">1</td>
-        <td th:text="${restaurant.restaurantName}">2</td>
-        <td th:text="${restaurant.restaurantAddress}">3</td>
-        <td th:text="${restaurant.restaurantPhoneNumber}">4</td>
-        <td th:text="${restaurant.restaurantMenuUrl}">5</td>
-        <td th:text="${restaurant.restaurantCreated}">6</td>
-        <td th:text="${restaurant.restaurantUpdated}">7</td>
+        <td th:text="${restaurant.restaurantName}"></td>
+        <td th:text="${restaurant.restaurantShortName}"></td>
+        <td th:text="${restaurant.restaurantAddress}"></td>
+        <td th:text="${restaurant.restaurantPhoneNumber}"></td>
+        <td th:text="${restaurant.restaurantMenuUrl}"></td>
+        <td><a href="#" th:href="@{'/restaurant-details/'+${restaurant.restaurantID}}">View Details</a> </td>
       </tr>
     </table>
   </div>

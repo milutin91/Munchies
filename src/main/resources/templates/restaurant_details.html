@@ -5,16 +5,35 @@
     <title>Munchies</title>
 </head>
 <body>
-  <table>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </table>
+<div align="center">
+    <h1>Restaurant Details</h1>
+    <br>
+    <table border="1">
+        <tr>
+            <td>Name</td>
+            <td>Short Name</td>
+            <td>Address</td>
+            <td>Phone</td>
+            <td>Menu URL</td>
+            <td>Delivery Time</td>
+            <td>Additional Charges</td>
+            <td>Delete/Update</td>
+
+        </tr>
+        <tr>
+            <td th:text="${restaurantDetails.restaurantName}"></td>
+            <td th:text="${restaurantDetails.restaurantShortName}"></td>
+            <td th:text="${restaurantDetails.restaurantAddress}"></td>
+            <td th:text="${restaurantDetails.restaurantPhoneNumber}"></td>
+            <td th:text="${restaurantDetails.restaurantMenuUrl}"></td>
+            <td th:text="${restaurantDetails.deliveryInfoDTO.getDeliveryInfoTime()}"></td>
+            <td th:text="${restaurantDetails.deliveryInfoDTO.getDeliveryInfoAdditionalCharges()}"></td>
+            <td>
+                <a href="#" th:href="@{'/restaurant-delete/'+${restaurantDetails.restaurantID}}" >Delete</a>
+                <a href="#" th:href="@{'/restaurant/update.form/'+${restaurantDetails.restaurantID}}" >Update</a>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

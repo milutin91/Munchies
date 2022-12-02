@@ -1,4 +1,4 @@
-package com.example.munchies;
+package com.example.munchies.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
