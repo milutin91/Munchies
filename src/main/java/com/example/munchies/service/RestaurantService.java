@@ -1,6 +1,7 @@
 package com.example.munchies.service;
 
-import com.example.munchies.model.dto.NewRestaurantDTO;
+import com.example.munchies.model.dto.DeliveryInfoDTO;
+import com.example.munchies.model.dto.NewOrUpdateRestaurantDTO;
 import com.example.munchies.model.dto.RestaurantDetailsDTO;
 import com.example.munchies.model.dto.RestaurantViewDTO;
 import com.example.munchies.model.entity.DeliveryInfoEntity;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RestaurantService {
@@ -25,55 +25,78 @@ public class RestaurantService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public String addRestaurant(NewRestaurantDTO restaurantDTO) {
+    public String addRestaurant(NewOrUpdateRestaurantDTO restaurantDTO, DeliveryInfoDTO deliveryInfoDTO) {
         RestaurantEntity restaurant = new RestaurantEntity();
         DeliveryInfoEntity deliveryInfo = new DeliveryInfoEntity();
-        restaurant.setRestaurantName(restaurantDTO.getRestaurantName());
-        restaurant.setRestaurantAddress(restaurantDTO.getRestaurantAddress());
-        restaurant.setRestaurantPhoneNumber(restaurantDTO.getRestaurantPhoneNumber());
-        restaurant.setRestaurantMenuUrl(restaurantDTO.getRestaurantMenuUrl());
+        restaurant = mapNewRestaurantDTOToRestaurantEntity(restaurantDTO, deliveryInfoDTO);
+        deliveryInfo = restaurant.getDeliveryInfoEntity();
+        deliveryInfo.setRestaurantEntity(restaurant);
         restaurant.setRestaurantCreated(LocalDateTime.now());
         String shortName = restaurantDTO.getRestaurantName().replaceAll(" ", "_");
         restaurant.setRestaurantShortName(shortName);
         restaurantRepository.save(restaurant);
-        deliveryInfo.setDeliveryInfoTime(restaurantDTO.getDeliveryInfoTime());
-        deliveryInfo.setDeliveryInfoAdditionalCharges(restaurantDTO.getDeliveryInfoAdditionalCharges());
-        deliveryInfo.setRestaurantEntity(restaurant);
-        deliveryInfo.setDeliveryInfoCreated(LocalDateTime.now());
-        deliveryInfoRepository.save(deliveryInfo);
         return "new restaurant created";
     }
 
-    public List<RestaurantViewDTO> getAllRestaurants(){
+    public List<RestaurantViewDTO> getAllRestaurants() {
         List<RestaurantEntity> restaurants = restaurantRepository.findAll();
         List<RestaurantViewDTO> restaurantViewDTOS = new ArrayList<>();
-        for (var restaurant : restaurants){
-            restaurantViewDTOS.add(mapToDTO(restaurant));
+        for (var restaurant : restaurants) {
+            restaurantViewDTOS.add(mapRestaurantViewToDTO(restaurant));
         }
         return restaurantViewDTOS;
     }
 
-    public RestaurantDetailsDTO findRestaurantDetails(Integer id){
-        RestaurantDetailsDTO restaurantDetailsDTO = new RestaurantDetailsDTO();
+    public RestaurantDetailsDTO findRestaurantDetails(Integer id) {
         RestaurantEntity restaurant = restaurantRepository.findById(id).get();
-        DeliveryInfoEntity deliveryInfo = deliveryInfoRepository.findDeliveryInfoEntityByRestaurantEntity(restaurant);
-        restaurantDetailsDTO.setRestaurantName(restaurant.getRestaurantName());
-        restaurantDetailsDTO.setRestaurantShortName(restaurant.getRestaurantShortName());
-        restaurantDetailsDTO.setRestaurantAddress(restaurant.getRestaurantAddress());
-        restaurantDetailsDTO.setRestaurantPhoneNumber(restaurant.getRestaurantPhoneNumber());
-        restaurantDetailsDTO.setRestaurantMenuUrl(restaurant.getRestaurantMenuUrl());
-        restaurantDetailsDTO.setDeliveryInfoTime(deliveryInfo.getDeliveryInfoTime());
-        restaurantDetailsDTO.setDeliveryInfoAdditionalCharges(deliveryInfo.getDeliveryInfoAdditionalCharges());
-        return restaurantDetailsDTO;
+        DeliveryInfoEntity deliveryInfo = deliveryInfoRepository.findDeliveryInfoByRestaurantEntity(restaurant);
+        RestaurantDetailsDTO restaurantDetailsDto1 = mapRestaurantDetailsToDTO(restaurant, deliveryInfo);
+        restaurantDetailsDto1 = mapRestaurantDetailsToDTO(restaurant, deliveryInfo);
+        return restaurantDetailsDto1;
     }
 
-    private RestaurantViewDTO mapToDTO(RestaurantEntity restaurant){
+    private RestaurantViewDTO mapRestaurantViewToDTO(RestaurantEntity restaurant) {
         RestaurantViewDTO restaurantViewDTO = modelMapper.map(restaurant, RestaurantViewDTO.class);
         return restaurantViewDTO;
     }
 
-    private RestaurantEntity mapToEntity(RestaurantViewDTO restaurantViewDTO){
-        RestaurantEntity restaurant = modelMapper.map(restaurantViewDTO, RestaurantEntity.class);
+    private RestaurantDetailsDTO mapRestaurantDetailsToDTO(RestaurantEntity restaurant, DeliveryInfoEntity deliveryInfo) {
+        RestaurantDetailsDTO restaurantDetailsDto = modelMapper.map(restaurant, RestaurantDetailsDTO.class);
+        DeliveryInfoDTO deliveryInfoDTO = modelMapper.map(deliveryInfo, DeliveryInfoDTO.class);
+        restaurantDetailsDto.setDeliveryInfoDTO(deliveryInfoDTO);
+        return restaurantDetailsDto;
+    }
+
+    private RestaurantEntity mapNewRestaurantDTOToRestaurantEntity(NewOrUpdateRestaurantDTO newOrUpdateRestaurantDTO, DeliveryInfoDTO deliveryInfoDTO) {
+        RestaurantEntity restaurant = modelMapper.map(newOrUpdateRestaurantDTO, RestaurantEntity.class);
+        DeliveryInfoEntity deliveryInfo = modelMapper.map(deliveryInfoDTO, DeliveryInfoEntity.class);
+        restaurant.setDeliveryInfoEntity(deliveryInfo);
         return restaurant;
+    }
+
+    public void deleteRestaurant(Integer id) {
+        restaurantRepository.deleteById(id);
+    }
+
+    public void updateRestaurant(Integer id, NewOrUpdateRestaurantDTO restaurantDTO, DeliveryInfoDTO deliveryInfoDTO) {
+        RestaurantEntity restaurantToUpdate = restaurantRepository.findById(id).get();
+        restaurantToUpdate.setRestaurantName(restaurantDTO.getRestaurantName());
+        String shortName = restaurantDTO.getRestaurantName().replaceAll(" ", "_");
+        restaurantToUpdate.setRestaurantShortName(shortName);
+        restaurantToUpdate.setRestaurantAddress(restaurantDTO.getRestaurantAddress());
+        restaurantToUpdate.setRestaurantPhoneNumber(restaurantDTO.getRestaurantPhoneNumber());
+        restaurantToUpdate.setRestaurantMenuUrl(restaurantDTO.getRestaurantMenuUrl());
+        restaurantToUpdate.setRestaurantUpdated(LocalDateTime.now());
+
+        DeliveryInfoEntity deliveryInfo = new DeliveryInfoEntity();
+        deliveryInfo = restaurantToUpdate.getDeliveryInfoEntity();
+        deliveryInfo.setDeliveryInfoTime(deliveryInfoDTO.getDeliveryInfoTime());
+        deliveryInfo.setDeliveryInfoAdditionalCharges(deliveryInfoDTO.getDeliveryInfoAdditionalCharges());
+        deliveryInfo.setDeliveryInfoUpdated(LocalDateTime.now());
+
+        deliveryInfo.setRestaurantEntity(restaurantToUpdate);
+
+        restaurantRepository.save(restaurantToUpdate);
+
     }
 }
