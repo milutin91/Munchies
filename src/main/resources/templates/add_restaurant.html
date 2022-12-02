@@ -23,10 +23,10 @@
         <input type="text" th:field="*{newRestaurant.restaurantMenuUrl}" id="menuUrl" name="menuUrl">
         <br>
         <label for="deliveryTime">Delivery Time</label>:
-        <input type="text" th:field="*{newRestaurant.deliveryInfoTime}" id="deliveryTime" name="deliveryTime">
+        <input type="text" th:field="*{deliveryInfo.deliveryInfoTime}" id="deliveryTime" name="deliveryTime">
         <br>
         <label for="additionalCharges">Additional Charges</label>:
-        <input type="text" th:field="*{newRestaurant.deliveryInfoAdditionalCharges}" id="additionalCharges"
+        <input type="text" th:field="*{deliveryInfo.deliveryInfoAdditionalCharges}" id="additionalCharges"
                name="additionalCharges">
         <br>
         <input type="submit" value="Add Restaurant"/>
