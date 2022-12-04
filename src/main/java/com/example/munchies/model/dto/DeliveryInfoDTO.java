@@ -1,7 +1,11 @@
 package com.example.munchies.model.dto;
 
+import javax.validation.constraints.PositiveOrZero;
+
 public class DeliveryInfoDTO {
+    @PositiveOrZero
     private int deliveryInfoTime;
+    @PositiveOrZero
     private double deliveryInfoAdditionalCharges;
 
     public DeliveryInfoDTO() {

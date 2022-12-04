@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Controller
 
 public class RestaurantController {
@@ -26,7 +28,7 @@ public class RestaurantController {
     }
 
     @PostMapping("/restaurant/save")
-    public String saveRestaurant(NewOrUpdateRestaurantDTO restaurantDTO, DeliveryInfoDTO deliveryInfoDTO){
+    public String saveRestaurant(@Valid NewOrUpdateRestaurantDTO restaurantDTO, @Valid DeliveryInfoDTO deliveryInfoDTO){
         restaurantService.addRestaurant(restaurantDTO, deliveryInfoDTO);
         return "redirect:/restaurant/all";
     }
