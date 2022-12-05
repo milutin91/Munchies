@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class NewOrUpdateRestaurantDTO {
+public class RestaurantRequestDTO {
     @NotBlank(message = "Name is mandatory")
     @Size(min = 1, max = 55, message = "Name must be between 1 and 55 characters")
     private String restaurantName;
@@ -19,9 +19,9 @@ public class NewOrUpdateRestaurantDTO {
     @Pattern(regexp = "[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)",
             message = "Not valid entry (Enter url without http/https)")
     private String restaurantMenuUrl;
-    private DeliveryInfoDTO deliveryInfoDTO;
+    private DeliveryInfoRequestDTO deliveryInfoRequestDTO;
 
-    public NewOrUpdateRestaurantDTO() {
+    public RestaurantRequestDTO() {
     }
 
 
@@ -49,12 +49,12 @@ public class NewOrUpdateRestaurantDTO {
         this.restaurantPhoneNumber = restaurantPhoneNumber;
     }
 
-    public DeliveryInfoDTO getDeliveryInfoDTO() {
-        return deliveryInfoDTO;
+    public DeliveryInfoRequestDTO getDeliveryInfoDTO() {
+        return deliveryInfoRequestDTO;
     }
 
-    public void setDeliveryInfoDTO(DeliveryInfoDTO deliveryInfoDTO) {
-        this.deliveryInfoDTO = deliveryInfoDTO;
+    public void setDeliveryInfoDTO(DeliveryInfoRequestDTO deliveryInfoRequestDTO) {
+        this.deliveryInfoRequestDTO = deliveryInfoRequestDTO;
     }
 
     public String getRestaurantMenuUrl() {
@@ -73,7 +73,7 @@ public class NewOrUpdateRestaurantDTO {
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantPhoneNumber='" + restaurantPhoneNumber + '\'' +
                 ", restaurantMenuUrl='" + restaurantMenuUrl + '\'' +
-                ", deliveryInfoDTO=" + deliveryInfoDTO +
+                ", deliveryInfoDTO=" + deliveryInfoRequestDTO +
                 '}';
     }
 }

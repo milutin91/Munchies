@@ -1,8 +1,8 @@
 package com.example.munchies.service;
 
-import com.example.munchies.model.dto.DeliveryInfoDTO;
-import com.example.munchies.model.dto.NewOrUpdateRestaurantDTO;
-import com.example.munchies.model.dto.RestaurantDetailsDTO;
+import com.example.munchies.model.dto.DeliveryInfoRequestDTO;
+import com.example.munchies.model.dto.RestaurantRequestDTO;
+import com.example.munchies.model.dto.RestaurantResponseDTO;
 import com.example.munchies.model.dto.RestaurantViewDTO;
 import com.example.munchies.model.entity.DeliveryInfoEntity;
 import com.example.munchies.model.entity.RestaurantEntity;
@@ -25,10 +25,10 @@ public class RestaurantService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public String addRestaurant(NewOrUpdateRestaurantDTO restaurantDTO, DeliveryInfoDTO deliveryInfoDTO) {
+    public String addRestaurant(RestaurantRequestDTO restaurantDTO, DeliveryInfoRequestDTO deliveryInfoRequestDTO) {
         RestaurantEntity restaurant = new RestaurantEntity();
         DeliveryInfoEntity deliveryInfo = new DeliveryInfoEntity();
-        restaurant = mapNewRestaurantDTOToRestaurantEntity(restaurantDTO, deliveryInfoDTO);
+        restaurant = mapNewRestaurantDTOToRestaurantEntity(restaurantDTO, deliveryInfoRequestDTO);
         deliveryInfo = restaurant.getDeliveryInfoEntity();
         deliveryInfo.setRestaurantEntity(restaurant);
         restaurant.setRestaurantCreated(LocalDateTime.now());
@@ -47,12 +47,12 @@ public class RestaurantService {
         return restaurantViewDTOS;
     }
 
-    public RestaurantDetailsDTO findRestaurantDetails(Integer id) {
+    public RestaurantResponseDTO findRestaurantDetails(Integer id) {
         RestaurantEntity restaurant = restaurantRepository.findById(id).get();
         DeliveryInfoEntity deliveryInfo = deliveryInfoRepository.findDeliveryInfoByRestaurantEntity(restaurant);
-        RestaurantDetailsDTO restaurantDetailsDto1 = mapRestaurantDetailsToDTO(restaurant, deliveryInfo);
-        restaurantDetailsDto1 = mapRestaurantDetailsToDTO(restaurant, deliveryInfo);
-        return restaurantDetailsDto1;
+        RestaurantResponseDTO restaurantResponseDto1 = mapRestaurantDetailsToDTO(restaurant, deliveryInfo);
+        restaurantResponseDto1 = mapRestaurantDetailsToDTO(restaurant, deliveryInfo);
+        return restaurantResponseDto1;
     }
 
     private RestaurantViewDTO mapRestaurantViewToDTO(RestaurantEntity restaurant) {
@@ -60,16 +60,16 @@ public class RestaurantService {
         return restaurantViewDTO;
     }
 
-    private RestaurantDetailsDTO mapRestaurantDetailsToDTO(RestaurantEntity restaurant, DeliveryInfoEntity deliveryInfo) {
-        RestaurantDetailsDTO restaurantDetailsDto = modelMapper.map(restaurant, RestaurantDetailsDTO.class);
-        DeliveryInfoDTO deliveryInfoDTO = modelMapper.map(deliveryInfo, DeliveryInfoDTO.class);
-        restaurantDetailsDto.setDeliveryInfoDTO(deliveryInfoDTO);
-        return restaurantDetailsDto;
+    private RestaurantResponseDTO mapRestaurantDetailsToDTO(RestaurantEntity restaurant, DeliveryInfoEntity deliveryInfo) {
+        RestaurantResponseDTO restaurantResponseDto = modelMapper.map(restaurant, RestaurantResponseDTO.class);
+        DeliveryInfoRequestDTO deliveryInfoRequestDTO = modelMapper.map(deliveryInfo, DeliveryInfoRequestDTO.class);
+        restaurantResponseDto.setDeliveryInfoRequestDTO(deliveryInfoRequestDTO);
+        return restaurantResponseDto;
     }
 
-    private RestaurantEntity mapNewRestaurantDTOToRestaurantEntity(NewOrUpdateRestaurantDTO newOrUpdateRestaurantDTO, DeliveryInfoDTO deliveryInfoDTO) {
-        RestaurantEntity restaurant = modelMapper.map(newOrUpdateRestaurantDTO, RestaurantEntity.class);
-        DeliveryInfoEntity deliveryInfo = modelMapper.map(deliveryInfoDTO, DeliveryInfoEntity.class);
+    private RestaurantEntity mapNewRestaurantDTOToRestaurantEntity(RestaurantRequestDTO restaurantRequestDTO, DeliveryInfoRequestDTO deliveryInfoRequestDTO) {
+        RestaurantEntity restaurant = modelMapper.map(restaurantRequestDTO, RestaurantEntity.class);
+        DeliveryInfoEntity deliveryInfo = modelMapper.map(deliveryInfoRequestDTO, DeliveryInfoEntity.class);
         restaurant.setDeliveryInfoEntity(deliveryInfo);
         return restaurant;
     }
@@ -78,7 +78,7 @@ public class RestaurantService {
         restaurantRepository.deleteById(id);
     }
 
-    public void updateRestaurant(Integer id, NewOrUpdateRestaurantDTO restaurantDTO, DeliveryInfoDTO deliveryInfoDTO) {
+    public void updateRestaurant(Integer id, RestaurantRequestDTO restaurantDTO, DeliveryInfoRequestDTO deliveryInfoRequestDTO) {
         RestaurantEntity restaurantToUpdate = restaurantRepository.findById(id).get();
         restaurantToUpdate.setRestaurantName(restaurantDTO.getRestaurantName());
         String shortName = restaurantDTO.getRestaurantName().replaceAll(" ", "_");
@@ -90,8 +90,8 @@ public class RestaurantService {
 
         DeliveryInfoEntity deliveryInfo = new DeliveryInfoEntity();
         deliveryInfo = restaurantToUpdate.getDeliveryInfoEntity();
-        deliveryInfo.setDeliveryInfoTime(deliveryInfoDTO.getDeliveryInfoTime());
-        deliveryInfo.setDeliveryInfoAdditionalCharges(deliveryInfoDTO.getDeliveryInfoAdditionalCharges());
+        deliveryInfo.setDeliveryInfoTime(deliveryInfoRequestDTO.getDeliveryInfoTime());
+        deliveryInfo.setDeliveryInfoAdditionalCharges(deliveryInfoRequestDTO.getDeliveryInfoAdditionalCharges());
         deliveryInfo.setDeliveryInfoUpdated(LocalDateTime.now());
 
         deliveryInfo.setRestaurantEntity(restaurantToUpdate);

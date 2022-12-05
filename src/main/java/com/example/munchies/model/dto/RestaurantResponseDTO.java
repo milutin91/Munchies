@@ -1,6 +1,6 @@
 package com.example.munchies.model.dto;
 
-public class RestaurantDetailsDTO {
+public class RestaurantResponseDTO {
 
     private int restaurantID;
     private String restaurantName;
@@ -8,9 +8,9 @@ public class RestaurantDetailsDTO {
     private String restaurantAddress;
     private String restaurantPhoneNumber;
     private String restaurantMenuUrl;
-    private DeliveryInfoDTO deliveryInfoDTO;
+    private DeliveryInfoRequestDTO deliveryInfoRequestDTO;
 
-    public RestaurantDetailsDTO() {
+    public RestaurantResponseDTO() {
     }
 
     public String getRestaurantName() {
@@ -53,13 +53,12 @@ public class RestaurantDetailsDTO {
         this.restaurantMenuUrl = restaurantMenuUrl;
     }
 
-
-    public DeliveryInfoDTO getDeliveryInfoDTO() {
-        return deliveryInfoDTO;
+    public DeliveryInfoRequestDTO getDeliveryInfoRequestDTO() {
+        return deliveryInfoRequestDTO;
     }
 
-    public void setDeliveryInfoDTO(DeliveryInfoDTO deliveryInfoDTO) {
-        this.deliveryInfoDTO = deliveryInfoDTO;
+    public void setDeliveryInfoRequestDTO(DeliveryInfoRequestDTO deliveryInfoRequestDTO) {
+        this.deliveryInfoRequestDTO = deliveryInfoRequestDTO;
     }
 
     public int getRestaurantID() {
@@ -78,7 +77,7 @@ public class RestaurantDetailsDTO {
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantPhoneNumber='" + restaurantPhoneNumber + '\'' +
                 ", restaurantMenuUrl='" + restaurantMenuUrl + '\'' +
-                ", deliveryInfoDTO=" + deliveryInfoDTO +
+                ", deliveryInfoDTO=" + deliveryInfoRequestDTO +
                 '}';
     }
 }

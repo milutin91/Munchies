@@ -26,8 +26,8 @@
             <td th:text="${restaurantDetails.restaurantAddress}"></td>
             <td th:text="${restaurantDetails.restaurantPhoneNumber}"></td>
             <td th:text="${restaurantDetails.restaurantMenuUrl}"></td>
-            <td th:text="${restaurantDetails.deliveryInfoDTO.getDeliveryInfoTime()}"></td>
-            <td th:text="${restaurantDetails.deliveryInfoDTO.getDeliveryInfoAdditionalCharges()}"></td>
+            <td th:text="${restaurantDetails.deliveryInfoRequestDTO.getDeliveryInfoTime()}"></td>
+            <td th:text="${restaurantDetails.deliveryInfoRequestDTO.getDeliveryInfoAdditionalCharges()}"></td>
             <td>
                 <a href="#" th:href="@{'/restaurant-delete/'+${restaurantDetails.restaurantID}}" >Delete</a>
                 <a href="#" th:href="@{'/restaurant/update.form/'+${restaurantDetails.restaurantID}}" >Update</a>
