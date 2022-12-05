@@ -2,13 +2,13 @@ package com.example.munchies.model.dto;
 
 import javax.validation.constraints.PositiveOrZero;
 
-public class DeliveryInfoDTO {
+public class DeliveryInfoRequestDTO {
     @PositiveOrZero(message = "Delivery Time must be greater than or equal to 0")
     private int deliveryInfoTime;
     @PositiveOrZero(message = "Additional Charges must be greater than or equal to 0")
     private double deliveryInfoAdditionalCharges;
 
-    public DeliveryInfoDTO() {
+    public DeliveryInfoRequestDTO() {
     }
 
     public int getDeliveryInfoTime() {
