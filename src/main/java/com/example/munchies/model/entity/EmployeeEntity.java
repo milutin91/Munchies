@@ -9,22 +9,14 @@ import java.util.List;
 public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
-    private int employeeID;
-    @Column(name = "employee_firstname")
+    private int employeeId;
     private String employeeFirstname;
-    @Column(name = "employee_lastname")
     private String employeeLastname;
-    @Column(name = "employee_email")
     private String employeeEmail;
-    @Column(name = "employee_password")
     private String employeePassword;
-    @Column(name = "employee_role")
     @Enumerated(EnumType.STRING)
     private EmployeeRole employeeRole;
-    @Column(name = "employee_created")
     private LocalDateTime employeeCreated;
-    @Column(name = "employee_updated")
     private LocalDateTime employeeUpdated;
 
     @OneToMany(mappedBy = "employeeEntity")
@@ -36,12 +28,12 @@ public class EmployeeEntity {
     public EmployeeEntity() {
     }
 
-    public int getEmployeeID() {
-        return employeeID;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getEmployeeFirstname() {
@@ -119,7 +111,7 @@ public class EmployeeEntity {
     @Override
     public String toString() {
         return "EmployeeEntity{" +
-                "employeeID=" + employeeID +
+                "employeeID=" + employeeId +
                 ", employeeFirstname='" + employeeFirstname + '\'' +
                 ", employeeLastname='" + employeeLastname + '\'' +
                 ", employeeEmail='" + employeeEmail + '\'' +

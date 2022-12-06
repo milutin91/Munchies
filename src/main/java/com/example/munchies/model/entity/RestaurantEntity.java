@@ -10,16 +10,11 @@ public class RestaurantEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restaurant_id")
-    private int restaurantID;
-    @Column(name = "restaurant_name")
+    private int restaurantId;
     private String restaurantName;
-    @Column(name = "restaurant_short_name")
     private String restaurantShortName;
-    @Column(name = "restaurant_address")
     private String restaurantAddress;
-    @Column(name = "restaurant_phone_number")
     private String restaurantPhoneNumber;
-    @Column(name = "restaurant_menu_url")
     private String restaurantMenuUrl;
     private LocalDateTime restaurantCreated;
     private LocalDateTime restaurantUpdated;
@@ -33,12 +28,12 @@ public class RestaurantEntity {
     public RestaurantEntity() {
     }
 
-    public int getRestaurantID() {
-        return restaurantID;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurantID(int restaurantID) {
-        this.restaurantID = restaurantID;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getRestaurantName() {
@@ -116,7 +111,7 @@ public class RestaurantEntity {
     @Override
     public String toString() {
         return "Restaurant{" +
-                "restaurantID=" + restaurantID +
+                "restaurantID=" + restaurantId +
                 ", restaurantName='" + restaurantName + '\'' +
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantPhoneNumber='" + restaurantPhoneNumber + '\'' +

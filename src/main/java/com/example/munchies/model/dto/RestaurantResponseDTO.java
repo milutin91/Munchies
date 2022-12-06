@@ -2,7 +2,7 @@ package com.example.munchies.model.dto;
 
 public class RestaurantResponseDTO {
 
-    private int restaurantID;
+    private int restaurantId;
     private String restaurantName;
     private String restaurantShortName;
     private String restaurantAddress;
@@ -61,12 +61,12 @@ public class RestaurantResponseDTO {
         this.deliveryInfoRequestDTO = deliveryInfoRequestDTO;
     }
 
-    public int getRestaurantID() {
-        return restaurantID;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurantID(int restaurantID) {
-        this.restaurantID = restaurantID;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     @Override
