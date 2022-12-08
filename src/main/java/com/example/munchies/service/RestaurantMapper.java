@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-public class CustomMapping {
+public class RestaurantMapper {
 
     public RestaurantEntity mapRestaurantCreationDtoToEntities(RestaurantCreationDTO restaurantDTO){
         RestaurantEntity restaurant = new RestaurantEntity();
@@ -54,6 +54,8 @@ public class CustomMapping {
         restaurantDTO.setRestaurantAddress(restaurantEntity.getRestaurantAddress());
         restaurantDTO.setRestaurantPhoneNumber(restaurantEntity.getRestaurantPhoneNumber());
         restaurantDTO.setRestaurantMenuUrl(restaurantEntity.getRestaurantMenuUrl());
+        restaurantDTO.setRestaurantCreated(restaurantEntity.getRestaurantCreated());
+        restaurantDTO.setRestaurantUpdated(restaurantEntity.getRestaurantUpdated());
         restaurantDTO.setDeliveryInfoTime(restaurantEntity.getDeliveryInfoEntity().getDeliveryInfoTime());
         restaurantDTO.setDeliveryInfoAdditionalCharges(restaurantEntity.getDeliveryInfoEntity().getDeliveryInfoAdditionalCharges());
         return restaurantDTO;
