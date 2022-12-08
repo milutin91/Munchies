@@ -71,7 +71,7 @@ public class RestaurantController {
     public String updateForm(@PathVariable("id") Integer id, Model model, RestaurantCreationDTO restaurantDTO) {
         model.addAttribute("id", id);
         model.addAttribute("updateRestaurant", restaurantDTO);
-        model.addAttribute("oldValues", restaurantService.findRestaurantDetails(id));
+        model.addAttribute("updateRestaurant", restaurantService.findRestaurantDetails(id));
         return "update_restaurant";
     }
 }

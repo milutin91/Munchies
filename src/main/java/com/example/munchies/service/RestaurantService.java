@@ -15,19 +15,19 @@ public class RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
     @Autowired
-    private CustomMapping customMapping;
+    private RestaurantMapper restaurantMapper;
 
     public RestaurantDTO createRestaurant(RestaurantCreationDTO restaurantDTO) {
-        RestaurantEntity restaurantEntity = customMapping.mapRestaurantCreationDtoToEntities(restaurantDTO);
-        restaurantRepository.save(restaurantEntity);
-        return customMapping.mapRestaurantEntityToRestaurantDto(restaurantEntity);
+        RestaurantEntity restaurantEntity = restaurantMapper.mapRestaurantCreationDtoToEntities(restaurantDTO);
+        RestaurantEntity restaurantResponse = restaurantRepository.save(restaurantEntity);
+        return restaurantMapper.mapRestaurantEntityToRestaurantDto(restaurantResponse);
     }
 
     public List<RestaurantDTO> getAllRestaurants() {
         List<RestaurantEntity> restaurants = restaurantRepository.findAll();
         List<RestaurantDTO> restaurantDTOS = new ArrayList<>();
         for (var restaurant : restaurants) {
-            restaurantDTOS.add(customMapping.mapRestaurantEntityToRestaurantDto(restaurant));
+            restaurantDTOS.add(restaurantMapper.mapRestaurantEntityToRestaurantDto(restaurant));
         }
         return restaurantDTOS;
     }
@@ -35,7 +35,7 @@ public class RestaurantService {
     public RestaurantDTO findRestaurantDetails(Integer id) {
         RestaurantEntity restaurant = restaurantRepository.findById(id).get();
 
-        return customMapping.mapRestaurantEntityToRestaurantDto(restaurant);
+        return restaurantMapper.mapRestaurantEntityToRestaurantDto(restaurant);
     }
 
     public void deleteRestaurant(Integer id) {
@@ -44,8 +44,8 @@ public class RestaurantService {
 
     public RestaurantDTO updateRestaurant(Integer id, RestaurantCreationDTO restaurantDTO) {
         RestaurantEntity restaurantToUpdate = restaurantRepository.findById(id).get();
-        restaurantToUpdate = customMapping.mapRestaurantUpdateDtoToEntities(restaurantToUpdate, restaurantDTO);
-        restaurantRepository.save(restaurantToUpdate);
-        return customMapping.mapRestaurantEntityToRestaurantDto(restaurantToUpdate);
+        restaurantToUpdate = restaurantMapper.mapRestaurantUpdateDtoToEntities(restaurantToUpdate, restaurantDTO);
+        RestaurantEntity restaurantResponse = restaurantRepository.save(restaurantToUpdate);
+        return restaurantMapper.mapRestaurantEntityToRestaurantDto(restaurantResponse);
     }
 }

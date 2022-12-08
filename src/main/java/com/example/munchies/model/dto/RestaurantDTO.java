@@ -1,5 +1,7 @@
 package com.example.munchies.model.dto;
 
+import java.time.LocalDateTime;
+
 public class RestaurantDTO {
 
     private int restaurantId;
@@ -8,6 +10,8 @@ public class RestaurantDTO {
     private String restaurantAddress;
     private String restaurantPhoneNumber;
     private String restaurantMenuUrl;
+    private LocalDateTime restaurantCreated;
+    private LocalDateTime restaurantUpdated;
     private int deliveryInfoTime;
     private double deliveryInfoAdditionalCharges;
 
@@ -62,6 +66,22 @@ public class RestaurantDTO {
         this.restaurantMenuUrl = restaurantMenuUrl;
     }
 
+    public LocalDateTime getRestaurantCreated() {
+        return restaurantCreated;
+    }
+
+    public void setRestaurantCreated(LocalDateTime restaurantCreated) {
+        this.restaurantCreated = restaurantCreated;
+    }
+
+    public LocalDateTime getRestaurantUpdated() {
+        return restaurantUpdated;
+    }
+
+    public void setRestaurantUpdated(LocalDateTime restaurantUpdated) {
+        this.restaurantUpdated = restaurantUpdated;
+    }
+
     public int getDeliveryInfoTime() {
         return deliveryInfoTime;
     }
@@ -80,13 +100,15 @@ public class RestaurantDTO {
 
     @Override
     public String toString() {
-        return "RestaurantResponseDTO{" +
+        return "RestaurantDTO{" +
                 "restaurantId=" + restaurantId +
                 ", restaurantName='" + restaurantName + '\'' +
                 ", restaurantShortName='" + restaurantShortName + '\'' +
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantPhoneNumber='" + restaurantPhoneNumber + '\'' +
                 ", restaurantMenuUrl='" + restaurantMenuUrl + '\'' +
+                ", restaurantCreated=" + restaurantCreated +
+                ", restaurantUpdated=" + restaurantUpdated +
                 ", deliveryInfoTime=" + deliveryInfoTime +
                 ", deliveryInfoAdditionalCharges=" + deliveryInfoAdditionalCharges +
                 '}';

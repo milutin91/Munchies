@@ -17,34 +17,34 @@
         <label for="restaurantName">Restaurant name</label>
         <input type="text" th:field="*{newRestaurant.restaurantName}" id="restaurantName" name="restaurantName">
         <br>
-        <p th:if="${#fields.hasErrors('newRestaurant.restaurantName')}" th:errorclass="error" th:errors="*{newRestaurant.restaurantName}">Invalid Name</p>
+        <p th:if="${#fields.hasErrors('newRestaurant.restaurantName')}" th:errorclass="error" th:errors="*{newRestaurant.restaurantName}"></p>
         <br>
         <label for="restaurantAddress">Restaurant Address</label>:
         <input type="text" th:field="*{newRestaurant.restaurantAddress}" id="restaurantAddress"
                name="restaurantAddress">
         <br>
-        <p th:if="${#fields.hasErrors('newRestaurant.restaurantAddress')}" th:errorclass="error" th:errors="*{newRestaurant.restaurantAddress}">Invalid Address</p>
+        <p th:if="${#fields.hasErrors('newRestaurant.restaurantAddress')}" th:errorclass="error" th:errors="*{newRestaurant.restaurantAddress}"></p>
         <br>
         <label for="phoneNumber">Phone Number</label>:
         <input type="text" th:field="*{newRestaurant.restaurantPhoneNumber}" id="phoneNumber" name="phoneNumber">
         <br>
-        <p th:if="${#fields.hasErrors('newRestaurant.restaurantPhoneNumber')}" th:errorclass="error" th:errors="*{newRestaurant.restaurantPhoneNumber}">Invalid Phone Number</p>
+        <p th:if="${#fields.hasErrors('newRestaurant.restaurantPhoneNumber')}" th:errorclass="error" th:errors="*{newRestaurant.restaurantPhoneNumber}"></p>
         <br>
         <label for="menuUrl">Menu URL</label>:
         <input type="text" th:field="*{newRestaurant.restaurantMenuUrl}" id="menuUrl" name="menuUrl">
         <br>
-        <p th:if="${#fields.hasErrors('newRestaurant.restaurantMenuUrl')}" th:errorclass="error" th:errors="*{newRestaurant.restaurantMenuUrl}">Invalid URL</p>
+        <p th:if="${#fields.hasErrors('newRestaurant.restaurantMenuUrl')}" th:errorclass="error" th:errors="*{newRestaurant.restaurantMenuUrl}"></p>
         <br>
         <label for="deliveryTime">Delivery Time</label>:
         <input type="text" th:field="*{newRestaurant.deliveryInfoTime}" id="deliveryTime" name="deliveryTime">
         <br>
-        <p th:if="${#fields.hasErrors('newRestaurant.deliveryInfoTime')}" th:errorclass="error" th:errors="*{newRestaurant.deliveryInfoTime}">Invalid Delivery Time</p>
+        <p th:if="${#fields.hasErrors('newRestaurant.deliveryInfoTime')}" th:errorclass="error" th:errors="*{newRestaurant.deliveryInfoTime}"></p>
         <br>
         <label for="additionalCharges">Additional Charges</label>:
         <input type="text" th:field="*{newRestaurant.deliveryInfoAdditionalCharges}" id="additionalCharges"
                name="additionalCharges">
         <br>
-        <p th:if="${#fields.hasErrors('newRestaurant.deliveryInfoAdditionalCharges')}" th:errorclass="error" th:errors="*{newRestaurant.deliveryInfoAdditionalCharges}">Invalid Additional Charges</p>
+        <p th:if="${#fields.hasErrors('newRestaurant.deliveryInfoAdditionalCharges')}" th:errorclass="error" th:errors="*{newRestaurant.deliveryInfoAdditionalCharges}"></p>
         <br>
         <input type="submit" value="Add Restaurant"/>
     </form>

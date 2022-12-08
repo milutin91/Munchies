@@ -15,10 +15,11 @@
             <td>Address</td>
             <td>Phone</td>
             <td>Menu URL</td>
+            <td>Restaurant Created</td>
+            <td>Restaurant Updated</td>
             <td>Delivery Time</td>
             <td>Additional Charges</td>
             <td>Delete/Update</td>
-
         </tr>
         <tr>
             <td th:text="${restaurantDetails.restaurantName}"></td>
@@ -26,6 +27,8 @@
             <td th:text="${restaurantDetails.restaurantAddress}"></td>
             <td th:text="${restaurantDetails.restaurantPhoneNumber}"></td>
             <td th:text="${restaurantDetails.restaurantMenuUrl}"></td>
+            <td th:text="${restaurantDetails.restaurantCreated}"></td>
+            <td th:text="${restaurantDetails.restaurantUpdated}"></td>
             <td th:text="${restaurantDetails.deliveryInfoTime}"></td>
             <td th:text="${restaurantDetails.deliveryInfoAdditionalCharges}"></td>
             <td>
