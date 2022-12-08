@@ -1,6 +1,6 @@
 package com.example.munchies.model.dto;
 
-public class RestaurantResponseDTO {
+public class RestaurantDTO {
 
     private int restaurantId;
     private String restaurantName;
@@ -8,9 +8,18 @@ public class RestaurantResponseDTO {
     private String restaurantAddress;
     private String restaurantPhoneNumber;
     private String restaurantMenuUrl;
-    private DeliveryInfoRequestDTO deliveryInfoRequestDTO;
+    private int deliveryInfoTime;
+    private double deliveryInfoAdditionalCharges;
 
-    public RestaurantResponseDTO() {
+    public RestaurantDTO() {
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getRestaurantName() {
@@ -53,31 +62,33 @@ public class RestaurantResponseDTO {
         this.restaurantMenuUrl = restaurantMenuUrl;
     }
 
-    public DeliveryInfoRequestDTO getDeliveryInfoRequestDTO() {
-        return deliveryInfoRequestDTO;
+    public int getDeliveryInfoTime() {
+        return deliveryInfoTime;
     }
 
-    public void setDeliveryInfoRequestDTO(DeliveryInfoRequestDTO deliveryInfoRequestDTO) {
-        this.deliveryInfoRequestDTO = deliveryInfoRequestDTO;
+    public void setDeliveryInfoTime(int deliveryInfoTime) {
+        this.deliveryInfoTime = deliveryInfoTime;
     }
 
-    public int getRestaurantId() {
-        return restaurantId;
+    public double getDeliveryInfoAdditionalCharges() {
+        return deliveryInfoAdditionalCharges;
     }
 
-    public void setRestaurantId(int restaurantId) {
-        this.restaurantId = restaurantId;
+    public void setDeliveryInfoAdditionalCharges(double deliveryInfoAdditionalCharges) {
+        this.deliveryInfoAdditionalCharges = deliveryInfoAdditionalCharges;
     }
 
     @Override
     public String toString() {
-        return "RestaurantDetailsDTO{" +
-                "restaurantName='" + restaurantName + '\'' +
+        return "RestaurantResponseDTO{" +
+                "restaurantId=" + restaurantId +
+                ", restaurantName='" + restaurantName + '\'' +
                 ", restaurantShortName='" + restaurantShortName + '\'' +
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantPhoneNumber='" + restaurantPhoneNumber + '\'' +
                 ", restaurantMenuUrl='" + restaurantMenuUrl + '\'' +
-                ", deliveryInfoDTO=" + deliveryInfoRequestDTO +
+                ", deliveryInfoTime=" + deliveryInfoTime +
+                ", deliveryInfoAdditionalCharges=" + deliveryInfoAdditionalCharges +
                 '}';
     }
 }

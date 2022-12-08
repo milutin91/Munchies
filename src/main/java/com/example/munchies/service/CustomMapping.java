@@ -62,5 +62,4 @@ public class CustomMapping {
     public String generateShortName(String name){
         return name.replaceAll(" ", "_");
     }
-
 }
