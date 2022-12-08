@@ -26,6 +26,7 @@ public class RestaurantEntity {
     private List<GroupOrderEntity> groupOrders;
 
     public RestaurantEntity() {
+        this.restaurantCreated = LocalDateTime.now();
     }
 
     public int getRestaurantId() {

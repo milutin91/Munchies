@@ -1,8 +1,7 @@
 package com.example.munchies.controller;
 
-import com.example.munchies.model.dto.DeliveryInfoRequestDTO;
-import com.example.munchies.model.dto.RestaurantRequestDTO;
-import com.example.munchies.model.dto.RestaurantResponseDTO;
+import com.example.munchies.model.dto.RestaurantCreationDTO;
+import com.example.munchies.model.dto.RestaurantDTO;
 import com.example.munchies.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,21 +22,18 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping("/restaurant/add")
-    public String addNewRestaurant(RestaurantRequestDTO restaurantDTO, DeliveryInfoRequestDTO deliveryInfoRequestDTO, Model model) {
+    public String addNewRestaurant(RestaurantCreationDTO restaurantDTO, Model model) {
         model.addAttribute("newRestaurant", restaurantDTO);
-        model.addAttribute("deliveryInfo", deliveryInfoRequestDTO);
         return "add_restaurant";
     }
 
     @PostMapping("/restaurant/save")
-    public String saveRestaurant(@ModelAttribute("deliveryInfo") @Valid DeliveryInfoRequestDTO deliveryInfoRequestDTO,
-                                 BindingResult bindingResult1,
-                                 @ModelAttribute("newRestaurant") @Valid RestaurantRequestDTO restaurantDTO,
-                                 BindingResult bindingResult2){
-        if(bindingResult1.hasErrors() || bindingResult2.hasErrors()){
+    public String saveRestaurant(@ModelAttribute("newRestaurant") @Valid RestaurantCreationDTO restaurantDTO,
+                                 BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
             return "add_restaurant";
         }
-        restaurantService.addRestaurant(restaurantDTO, deliveryInfoRequestDTO);
+        restaurantService.createRestaurant(restaurantDTO);
         return "redirect:/restaurant/all";
     }
 
@@ -49,8 +45,8 @@ public class RestaurantController {
 
     @GetMapping("/restaurant-details/{id}")
     public String getRestaurantDetails(@PathVariable("id") Integer id, Model model){
-        RestaurantResponseDTO restaurantResponseDto = restaurantService.findRestaurantDetails(id);
-        model.addAttribute("restaurantDetails", restaurantResponseDto);
+        RestaurantDTO restaurantDto = restaurantService.findRestaurantDetails(id);
+        model.addAttribute("restaurantDetails", restaurantDto);
         return "restaurant_details";
     }
 
@@ -62,22 +58,20 @@ public class RestaurantController {
 
     @PostMapping("/restaurant-update/{id}")
     public String updateRestaurant(@PathVariable("id") Integer id,
-                                   @ModelAttribute("updateRestaurant") @Valid RestaurantRequestDTO restaurantDTO,
-                                   BindingResult result1,
-                                   @ModelAttribute("updateDeliveryInfo") @Valid DeliveryInfoRequestDTO deliveryInfoRequestDTO,
-                                   BindingResult result2){
-        if(result1.hasErrors() || result2.hasErrors()){
+                                   @ModelAttribute("updateRestaurant") @Valid RestaurantCreationDTO restaurantDTO,
+                                   BindingResult result1){
+        if(result1.hasErrors()){
             return "update_restaurant";
         }
-        restaurantService.updateRestaurant(id, restaurantDTO, deliveryInfoRequestDTO);
+        restaurantService.updateRestaurant(id, restaurantDTO);
         return "redirect:/restaurant/all";
     }
 
     @GetMapping("/restaurant/update.form/{id}")
-    public String updateForm(@PathVariable("id") Integer id, Model model, RestaurantRequestDTO restaurantDTO, DeliveryInfoRequestDTO deliveryInfoRequestDTO) {
+    public String updateForm(@PathVariable("id") Integer id, Model model, RestaurantCreationDTO restaurantDTO) {
         model.addAttribute("id", id);
         model.addAttribute("updateRestaurant", restaurantDTO);
-        model.addAttribute("updateDeliveryInfo", deliveryInfoRequestDTO);
+        model.addAttribute("oldValues", restaurantService.findRestaurantDetails(id));
         return "update_restaurant";
     }
 }

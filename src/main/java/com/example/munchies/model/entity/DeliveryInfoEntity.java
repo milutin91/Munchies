@@ -14,7 +14,7 @@ public class DeliveryInfoEntity {
     private LocalDateTime deliveryInfoCreated;
     private LocalDateTime deliveryInfoUpdated;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "restaurant_id", referencedColumnName = "restaurant_id")
     private RestaurantEntity restaurantEntity;
 
