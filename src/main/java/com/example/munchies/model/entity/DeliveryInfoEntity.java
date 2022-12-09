@@ -8,18 +8,13 @@ import java.time.LocalDateTime;
 public class DeliveryInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "delivery_info_id")
-    private int deliveryInfoID;
-    @Column(name = "delivery_info_time")
+    private int deliveryInfoId;
     private int deliveryInfoTime;
-    @Column(name = "delivery_info_additional_charges")
     private double deliveryInfoAdditionalCharges;
-    @Column(name = "delivery_info_created")
     private LocalDateTime deliveryInfoCreated;
-    @Column(name = "delivery_info_updated")
     private LocalDateTime deliveryInfoUpdated;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "restaurant_id", referencedColumnName = "restaurant_id")
     private RestaurantEntity restaurantEntity;
 
@@ -27,12 +22,12 @@ public class DeliveryInfoEntity {
         this.deliveryInfoCreated = LocalDateTime.now();
     }
 
-    public int getDeliveryInfoID() {
-        return deliveryInfoID;
+    public int getDeliveryInfoId() {
+        return deliveryInfoId;
     }
 
-    public void setDeliveryInfoID(int deliveryInfoID) {
-        this.deliveryInfoID = deliveryInfoID;
+    public void setDeliveryInfoId(int deliveryInfoId) {
+        this.deliveryInfoId = deliveryInfoId;
     }
 
 
@@ -79,7 +74,7 @@ public class DeliveryInfoEntity {
     @Override
     public String toString() {
         return "DeliveryInfoEntity{" +
-                "deliveryInfoID=" + deliveryInfoID +
+                "deliveryInfoID=" + deliveryInfoId +
                 ", deliveryInfoTime=" + deliveryInfoTime +
                 ", deliveryInfoAdditionalCharges=" + deliveryInfoAdditionalCharges +
                 ", deliveryInfoCreated=" + deliveryInfoCreated +

@@ -8,17 +8,11 @@ import java.time.LocalDateTime;
 public class OrderItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_item_id")
-    private int orderItemID;
-    @Column(name = "order_item_description")
+    private int orderItemId;
     private String orderItemDescription;
-    @Column(name = "order_item_quantity")
     private int orderItemQuantity;
-    @Column(name = "order_item_price")
     private double orderItemPrice;
-    @Column(name = "order_item_created")
     private LocalDateTime orderItemCreated;
-    @Column(name = "order_item_updated")
     private LocalDateTime orderItemUpdated;
 
     @ManyToOne
@@ -32,12 +26,12 @@ public class OrderItemEntity {
     public OrderItemEntity() {
     }
 
-    public int getOrderItemID() {
-        return orderItemID;
+    public int getOrderItemId() {
+        return orderItemId;
     }
 
-    public void setOrderItemID(int orderItemID) {
-        this.orderItemID = orderItemID;
+    public void setOrderItemId(int orderItemId) {
+        this.orderItemId = orderItemId;
     }
 
     public String getOrderItemDescription() {
@@ -99,7 +93,7 @@ public class OrderItemEntity {
     @Override
     public String toString() {
         return "OrderItemEntity{" +
-                "orderItemID=" + orderItemID +
+                "orderItemID=" + orderItemId +
                 ", orderItemDescription='" + orderItemDescription + '\'' +
                 ", orderItemQuantity=" + orderItemQuantity +
                 ", orderItemPrice=" + orderItemPrice +

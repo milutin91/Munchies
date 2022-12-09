@@ -9,11 +9,8 @@ import java.util.List;
 public class GroupOrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "group_order_id")
-    private int groupOrderID;
-    @Column(name = "group_order_created")
+    private int groupOrderId;
     private LocalDateTime groupOrderCreated;
-    @Column(name = "group_order_updated")
     private LocalDateTime groupOrderUpdate;
 
     @ManyToOne
@@ -30,12 +27,12 @@ public class GroupOrderEntity {
     public GroupOrderEntity() {
     }
 
-    public int getGroupOrderID() {
-        return groupOrderID;
+    public int getGroupOrderId() {
+        return groupOrderId;
     }
 
-    public void setGroupOrderID(int groupOrderID) {
-        this.groupOrderID = groupOrderID;
+    public void setGroupOrderId(int groupOrderId) {
+        this.groupOrderId = groupOrderId;
     }
 
     public LocalDateTime getGroupOrderCreated() {
@@ -81,7 +78,7 @@ public class GroupOrderEntity {
     @Override
     public String toString() {
         return "GroupOrderEntity{" +
-                "groupOrderID=" + groupOrderID +
+                "groupOrderID=" + groupOrderId +
                 ", groupOrderCreated=" + groupOrderCreated +
                 ", groupOrderUpdate=" + groupOrderUpdate +
                 ", restaurantEntity=" + restaurantEntity +

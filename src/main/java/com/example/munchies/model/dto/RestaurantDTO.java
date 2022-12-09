@@ -1,15 +1,9 @@
-package com.example.munchies.model.entity;
+package com.example.munchies.model.dto;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
-@Table(name = "restaurant")
-public class RestaurantEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "restaurant_id")
+public class RestaurantDTO {
+
     private int restaurantId;
     private String restaurantName;
     private String restaurantShortName;
@@ -18,15 +12,10 @@ public class RestaurantEntity {
     private String restaurantMenuUrl;
     private LocalDateTime restaurantCreated;
     private LocalDateTime restaurantUpdated;
+    private int deliveryInfoTime;
+    private double deliveryInfoAdditionalCharges;
 
-    @OneToOne(mappedBy = "restaurantEntity", cascade = CascadeType.ALL)
-    private DeliveryInfoEntity deliveryInfoEntity;
-
-    @OneToMany(mappedBy = "restaurantEntity")
-    private List<GroupOrderEntity> groupOrders;
-
-    public RestaurantEntity() {
-        this.restaurantCreated = LocalDateTime.now();
+    public RestaurantDTO() {
     }
 
     public int getRestaurantId() {
@@ -43,6 +32,14 @@ public class RestaurantEntity {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
+    }
+
+    public String getRestaurantShortName() {
+        return restaurantShortName;
+    }
+
+    public void setRestaurantShortName(String restaurantShortName) {
+        this.restaurantShortName = restaurantShortName;
     }
 
     public String getRestaurantAddress() {
@@ -85,41 +82,35 @@ public class RestaurantEntity {
         this.restaurantUpdated = restaurantUpdated;
     }
 
-    public String getRestaurantShortName() {
-        return restaurantShortName;
+    public int getDeliveryInfoTime() {
+        return deliveryInfoTime;
     }
 
-    public void setRestaurantShortName(String restaurantShortName) {
-        this.restaurantShortName = restaurantShortName;
+    public void setDeliveryInfoTime(int deliveryInfoTime) {
+        this.deliveryInfoTime = deliveryInfoTime;
     }
 
-    public DeliveryInfoEntity getDeliveryInfoEntity() {
-        return deliveryInfoEntity;
+    public double getDeliveryInfoAdditionalCharges() {
+        return deliveryInfoAdditionalCharges;
     }
 
-    public void setDeliveryInfoEntity(DeliveryInfoEntity deliveryInfoEntity) {
-        this.deliveryInfoEntity = deliveryInfoEntity;
-    }
-
-    public List<GroupOrderEntity> getGroupOrders() {
-        return groupOrders;
-    }
-
-    public void setGroupOrders(List<GroupOrderEntity> groupOrders) {
-        this.groupOrders = groupOrders;
+    public void setDeliveryInfoAdditionalCharges(double deliveryInfoAdditionalCharges) {
+        this.deliveryInfoAdditionalCharges = deliveryInfoAdditionalCharges;
     }
 
     @Override
     public String toString() {
-        return "Restaurant{" +
-                "restaurantID=" + restaurantId +
+        return "RestaurantDTO{" +
+                "restaurantId=" + restaurantId +
                 ", restaurantName='" + restaurantName + '\'' +
+                ", restaurantShortName='" + restaurantShortName + '\'' +
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantPhoneNumber='" + restaurantPhoneNumber + '\'' +
                 ", restaurantMenuUrl='" + restaurantMenuUrl + '\'' +
-                ", deliveryInfoCreated=" + restaurantCreated +
-                ", deliveryInfoUpdated=" + restaurantUpdated +
+                ", restaurantCreated=" + restaurantCreated +
+                ", restaurantUpdated=" + restaurantUpdated +
+                ", deliveryInfoTime=" + deliveryInfoTime +
+                ", deliveryInfoAdditionalCharges=" + deliveryInfoAdditionalCharges +
                 '}';
     }
 }
-

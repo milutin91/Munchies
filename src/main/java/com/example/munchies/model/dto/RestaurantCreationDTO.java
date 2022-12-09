@@ -2,9 +2,9 @@ package com.example.munchies.model.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
-
-public class RestaurantRequestDTO {
+public class RestaurantCreationDTO {
     @NotBlank(message = "Name is mandatory")
     @Size(min = 1, max = 55, message = "Name must be between 1 and 55 characters")
     private String restaurantName;
@@ -19,9 +19,12 @@ public class RestaurantRequestDTO {
     @Pattern(regexp = "[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)",
             message = "Not valid entry (Enter url without http/https)")
     private String restaurantMenuUrl;
-    private DeliveryInfoRequestDTO deliveryInfoRequestDTO;
+    @PositiveOrZero(message = "Delivery Time must be greater than or equal to 0")
+    private int deliveryInfoTime;
+    @PositiveOrZero(message = "Additional Charges must be greater than or equal to 0")
+    private double deliveryInfoAdditionalCharges;
 
-    public RestaurantRequestDTO() {
+    public RestaurantCreationDTO() {
     }
 
 
@@ -48,15 +51,6 @@ public class RestaurantRequestDTO {
     public void setRestaurantPhoneNumber(String restaurantPhoneNumber) {
         this.restaurantPhoneNumber = restaurantPhoneNumber;
     }
-
-    public DeliveryInfoRequestDTO getDeliveryInfoDTO() {
-        return deliveryInfoRequestDTO;
-    }
-
-    public void setDeliveryInfoDTO(DeliveryInfoRequestDTO deliveryInfoRequestDTO) {
-        this.deliveryInfoRequestDTO = deliveryInfoRequestDTO;
-    }
-
     public String getRestaurantMenuUrl() {
         return restaurantMenuUrl;
     }
@@ -65,15 +59,31 @@ public class RestaurantRequestDTO {
         this.restaurantMenuUrl = restaurantMenuUrl;
     }
 
+    public int getDeliveryInfoTime() {
+        return deliveryInfoTime;
+    }
+
+    public void setDeliveryInfoTime(int deliveryInfoTime) {
+        this.deliveryInfoTime = deliveryInfoTime;
+    }
+
+    public double getDeliveryInfoAdditionalCharges() {
+        return deliveryInfoAdditionalCharges;
+    }
+
+    public void setDeliveryInfoAdditionalCharges(double deliveryInfoAdditionalCharges) {
+        this.deliveryInfoAdditionalCharges = deliveryInfoAdditionalCharges;
+    }
 
     @Override
     public String toString() {
-        return "NewRestaurantDTO{" +
+        return "RestaurantRequestDTO{" +
                 "restaurantName='" + restaurantName + '\'' +
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantPhoneNumber='" + restaurantPhoneNumber + '\'' +
                 ", restaurantMenuUrl='" + restaurantMenuUrl + '\'' +
-                ", deliveryInfoDTO=" + deliveryInfoRequestDTO +
+                ", deliveryInfoTime=" + deliveryInfoTime +
+                ", deliveryInfoAdditionalCharges=" + deliveryInfoAdditionalCharges +
                 '}';
     }
 }
