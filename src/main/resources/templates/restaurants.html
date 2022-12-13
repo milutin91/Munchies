@@ -5,29 +5,31 @@
     <title>Munchies</title>
 </head>
 <body>
-  <div align="center">
+<div align="center">
     <br>
     <h1>Restaurant List</h1>
     <br>
     <table border="1">
-      <tr>
-        <td>Name</td>
-        <td>Short Name</td>
-        <td>Address</td>
-        <td>Phone</td>
-        <td>Menu URL</td>
-        <td>Details</td>
-      </tr>
-      <tr th:each="restaurant : ${restaurants}">
-        <td th:text="${restaurant.restaurantName}"></td>
-        <td th:text="${restaurant.restaurantShortName}"></td>
-        <td th:text="${restaurant.restaurantAddress}"></td>
-        <td th:text="${restaurant.restaurantPhoneNumber}"></td>
-        <td th:text="${restaurant.restaurantMenuUrl}"></td>
-        <td><a href="#" th:href="@{'/restaurant-details/'+${restaurant.restaurantId}}">View Details</a> </td>
-      </tr>
+        <tr>
+            <td>Name</td>
+            <td>Short Name</td>
+            <td>Address</td>
+            <td>Phone</td>
+            <td>Menu URL</td>
+            <td>Details</td>
+            <td>New Group Order</td>
+        </tr>
+        <tr th:each="restaurant : ${restaurants}">
+            <td th:text="${restaurant.restaurantName}"></td>
+            <td th:text="${restaurant.restaurantShortName}"></td>
+            <td th:text="${restaurant.restaurantAddress}"></td>
+            <td th:text="${restaurant.restaurantPhoneNumber}"></td>
+            <td th:text="${restaurant.restaurantMenuUrl}"></td>
+            <td><a href="#" th:href="@{'/restaurant-details/'+${restaurant.restaurantId}}">View Details</a></td>
+            <td><a href="#" th:href="@{'/group-order/create/'+${restaurant.restaurantId}}">New Group Order</a></td>
+        </tr>
     </table>
-  </div>
+</div>
 
 </body>
 </html>
