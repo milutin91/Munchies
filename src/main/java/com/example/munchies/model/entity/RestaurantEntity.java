@@ -22,7 +22,7 @@ public class RestaurantEntity {
     @OneToOne(mappedBy = "restaurantEntity", cascade = CascadeType.ALL)
     private DeliveryInfoEntity deliveryInfoEntity;
 
-    @OneToMany(mappedBy = "restaurantEntity")
+    @OneToMany(mappedBy = "restaurantEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GroupOrderEntity> groupOrders;
 
     public RestaurantEntity() {

@@ -2,7 +2,6 @@ package com.example.munchies.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -18,12 +17,6 @@ public class EmployeeEntity {
     private EmployeeRole employeeRole;
     private LocalDateTime employeeCreated;
     private LocalDateTime employeeUpdated;
-
-    @OneToMany(mappedBy = "employeeEntity")
-    private List<GroupOrderEntity> groupOrders;
-
-    @OneToMany(mappedBy = "employeeEntity")
-    private List<OrderItemEntity> orderItems;
 
     public EmployeeEntity() {
     }
@@ -90,22 +83,6 @@ public class EmployeeEntity {
 
     public void setEmployeeUpdated(LocalDateTime employeeUpdated) {
         this.employeeUpdated = employeeUpdated;
-    }
-
-    public List<GroupOrderEntity> getGroupOrders() {
-        return groupOrders;
-    }
-
-    public void setGroupOrders(List<GroupOrderEntity> groupOrders) {
-        this.groupOrders = groupOrders;
-    }
-
-    public List<OrderItemEntity> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItemEntity> orderItems) {
-        this.orderItems = orderItems;
     }
 
     @Override

@@ -9,17 +9,13 @@ public class OrderItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderItemId;
+    private String orderItemEmployeeName;
     private String orderItemDescription;
-    private int orderItemQuantity;
     private double orderItemPrice;
     private LocalDateTime orderItemCreated;
     private LocalDateTime orderItemUpdated;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private EmployeeEntity employeeEntity;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_order_id")
     private GroupOrderEntity groupOrderEntity;
 
@@ -34,20 +30,20 @@ public class OrderItemEntity {
         this.orderItemId = orderItemId;
     }
 
+    public String getOrderItemEmployeeName() {
+        return orderItemEmployeeName;
+    }
+
+    public void setOrderItemEmployeeName(String orderItemEmployeeName) {
+        this.orderItemEmployeeName = orderItemEmployeeName;
+    }
+
     public String getOrderItemDescription() {
         return orderItemDescription;
     }
 
     public void setOrderItemDescription(String orderItemDescription) {
         this.orderItemDescription = orderItemDescription;
-    }
-
-    public int getOrderItemQuantity() {
-        return orderItemQuantity;
-    }
-
-    public void setOrderItemQuantity(int orderItemQuantity) {
-        this.orderItemQuantity = orderItemQuantity;
     }
 
     public double getOrderItemPrice() {
@@ -74,14 +70,6 @@ public class OrderItemEntity {
         this.orderItemUpdated = orderItemUpdated;
     }
 
-    public EmployeeEntity getEmployeeEntity() {
-        return employeeEntity;
-    }
-
-    public void setEmployeeEntity(EmployeeEntity employeeEntity) {
-        this.employeeEntity = employeeEntity;
-    }
-
     public GroupOrderEntity getGroupOrderEntity() {
         return groupOrderEntity;
     }
@@ -95,11 +83,9 @@ public class OrderItemEntity {
         return "OrderItemEntity{" +
                 "orderItemID=" + orderItemId +
                 ", orderItemDescription='" + orderItemDescription + '\'' +
-                ", orderItemQuantity=" + orderItemQuantity +
                 ", orderItemPrice=" + orderItemPrice +
                 ", orderItemCreated=" + orderItemCreated +
                 ", orderItemUpdated=" + orderItemUpdated +
-                ", employeeEntity=" + employeeEntity +
                 ", groupOrderEntity=" + groupOrderEntity +
                 '}';
     }

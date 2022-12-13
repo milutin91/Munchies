@@ -1,4 +1,4 @@
-package com.example.munchies.service;
+package com.example.munchies.mapper;
 
 import com.example.munchies.model.dto.RestaurantCreationDTO;
 import com.example.munchies.model.dto.RestaurantDTO;

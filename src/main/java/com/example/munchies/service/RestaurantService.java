@@ -1,5 +1,6 @@
 package com.example.munchies.service;
 
+import com.example.munchies.mapper.RestaurantMapper;
 import com.example.munchies.model.dto.RestaurantCreationDTO;
 import com.example.munchies.model.dto.RestaurantDTO;
 import com.example.munchies.model.entity.RestaurantEntity;
