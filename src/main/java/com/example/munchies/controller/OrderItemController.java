@@ -4,7 +4,7 @@ import com.example.munchies.mapper.GroupOrderMapper;
 import com.example.munchies.model.dto.GroupOrderDTO;
 import com.example.munchies.model.dto.OrderItemCreationDTO;
 import com.example.munchies.model.entity.GroupOrderEntity;
-import com.example.munchies.repository.GroupOrderRepository;
+import com.example.munchies.service.GroupOrderService;
 import com.example.munchies.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,14 +17,14 @@ public class OrderItemController {
     @Autowired
     OrderItemService orderItemService;
     @Autowired
-    GroupOrderRepository groupOrderRepository;
+    GroupOrderService groupOrderService;
     @Autowired
     GroupOrderMapper groupOrderMapper;
 
     @PostMapping("/restaurant/{restaurantId}/group-order/selection-create")
     public String createEmployeeSelection(OrderItemCreationDTO orderItemCreationDTO, RedirectAttributes redirectAttributes){
         orderItemService.createEmployeeSelection(orderItemCreationDTO);
-        GroupOrderEntity groupOrderEntity = groupOrderRepository.findTopByOrderByGroupOrderIdDesc();
+        GroupOrderEntity groupOrderEntity = groupOrderService.getLatestGroupOrder();
         GroupOrderDTO groupOrderDTO = groupOrderMapper.mapGroupOrderEntityToDto(groupOrderEntity);
         redirectAttributes.addAttribute("groupOrderId", groupOrderDTO.getGroupOrderId());
         redirectAttributes.addAttribute("groupOrderRestaurantId", groupOrderDTO.getRestaurantId());

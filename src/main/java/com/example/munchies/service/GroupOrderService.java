@@ -43,4 +43,8 @@ public class GroupOrderService {
     public boolean groupOrderIsActive(GroupOrderDTO groupOrderDTO) {
         return !LocalDateTime.now().isAfter(groupOrderDTO.getTimeout());
     }
+
+    public GroupOrderEntity getLatestGroupOrder(){
+        return groupOrderRepository.findTopByOrderByGroupOrderIdDesc();
+    }
 }
