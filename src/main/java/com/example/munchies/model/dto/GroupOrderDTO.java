@@ -1,16 +1,20 @@
 package com.example.munchies.model.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class GroupOrderDTO {
     private int groupOrderId;
     private int groupOrderTimeout;
     private LocalDateTime timeout;
     private String groupOrderEmployeeName;
+    private boolean isActive;
     private int restaurantId;
     private String restaurantName;
     private String restaurantPhoneNumber;
     private String restaurantMenuUrl;
+    private List<OrderItemDTO> orderItemDTOS;
+    private double total;
 
     public GroupOrderDTO() {
     }
@@ -47,6 +51,14 @@ public class GroupOrderDTO {
         this.groupOrderEmployeeName = groupOrderEmployeeName;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public int getRestaurantId() {
         return restaurantId;
     }
@@ -77,6 +89,22 @@ public class GroupOrderDTO {
 
     public void setRestaurantMenuUrl(String restaurantMenuUrl) {
         this.restaurantMenuUrl = restaurantMenuUrl;
+    }
+
+    public List<OrderItemDTO> getOrderItemDTOS() {
+        return orderItemDTOS;
+    }
+
+    public void setOrderItemDTOS(List<OrderItemDTO> orderItemEntities) {
+        this.orderItemDTOS = orderItemEntities;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     @Override

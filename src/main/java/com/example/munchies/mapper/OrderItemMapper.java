@@ -31,6 +31,7 @@ public class OrderItemMapper {
         orderItemDTO.setOrderItemEmployeeName(orderItemEntity.getOrderItemEmployeeName());
         orderItemDTO.setOrderItemDescription(orderItemEntity.getOrderItemDescription());
         orderItemDTO.setOrderItemPrice(orderItemEntity.getOrderItemPrice());
+        orderItemDTO.setGroupOrderEntity(orderItemEntity.getGroupOrderEntity());
 
         return orderItemDTO;
     }

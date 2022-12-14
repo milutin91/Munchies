@@ -28,7 +28,7 @@
 </table>
 <br>
 <h2>Selection</h2>
-<div th:switch="${isActive}">
+<div th:switch="${groupOrder.isActive}">
     <form action="#" th:action="@{'/restaurant/'+${restaurantId}+'/group-order/selection-create'}" method="post" th:case="${true}">
         <label for="orderItemEmployeeName">Employee Name</label>
         <input type="text" th:field="*{orderItemCreation.orderItemEmployeeName}" id="orderItemEmployeeName"
@@ -53,7 +53,7 @@
         <td>Item Name</td>
         <td>Item Price</td>
     </tr>
-    <tr th:each="orderItem : ${orderItemsResponse}">
+    <tr th:each="orderItem : ${groupOrder.orderItemDTOS}">
         <td th:text="${orderItem.orderItemEmployeeName}"></td>
         <td th:text="${orderItem.orderItemDescription}"></td>
         <td th:text="${orderItem.orderItemPrice}"></td>
@@ -61,7 +61,7 @@
     <tr>
         <td></td>
         <td></td>
-        <td th:text="'Total: ' + ${total}"></td>
+        <td th:text="'Total: ' + ${groupOrder.total}"></td>
     </tr>
 </table>
 

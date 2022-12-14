@@ -2,9 +2,7 @@ package com.example.munchies.controller;
 
 import com.example.munchies.model.dto.GroupOrderCreationDTO;
 import com.example.munchies.model.dto.OrderItemCreationDTO;
-import com.example.munchies.model.dto.OrderItemDTO;
 import com.example.munchies.service.GroupOrderService;
-import com.example.munchies.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +17,6 @@ public class GroupOrderController {
 
     @Autowired
     GroupOrderService groupOrderService;
-    @Autowired
-    OrderItemService orderItemService;
 
     //CREATE (form)
     @GetMapping("/restaurant/{restaurantId}/group-order/create")
@@ -45,9 +41,6 @@ public class GroupOrderController {
     public String groupOrderPage(OrderItemCreationDTO orderItemCreationDTO, Model model) {
         model.addAttribute("groupOrder", groupOrderService.getGroupOrder());
         model.addAttribute("orderItemCreation", orderItemCreationDTO);
-        model.addAttribute("orderItemsResponse", orderItemService.getOrderItemSelectionsLastGroupOrderId());
-        model.addAttribute("total", orderItemService.getTotal(orderItemService.getOrderItemSelectionsLastGroupOrderId()));
-        model.addAttribute("isActive", groupOrderService.groupOrderIsActive(groupOrderService.getGroupOrder()));
         return "group_order";
     }
 }
