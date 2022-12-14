@@ -7,6 +7,7 @@ public class GroupOrderDTO {
     private int groupOrderTimeout;
     private LocalDateTime timeout;
     private String groupOrderEmployeeName;
+    private int restaurantId;
     private String restaurantName;
     private String restaurantPhoneNumber;
     private String restaurantMenuUrl;
@@ -44,6 +45,14 @@ public class GroupOrderDTO {
 
     public void setGroupOrderEmployeeName(String groupOrderEmployeeName) {
         this.groupOrderEmployeeName = groupOrderEmployeeName;
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getRestaurantName() {

@@ -18,7 +18,7 @@
 
     </tr>
     <tr>
-        <td th:text="'http://localhost:8080/group-order/' + ${groupOrder.groupOrderId}"></td>
+        <td th:text="'http://localhost:8080/restaurant/' + ${groupOrder.restaurantId} + '/group-order/create/' + ${groupOrder.groupOrderId}"></td>
         <td th:text="${groupOrder.timeout}"></td>
         <td th:text="${groupOrder.groupOrderEmployeeName}"></td>
         <td th:text="${groupOrder.restaurantName}"></td>
@@ -29,7 +29,7 @@
 <br>
 <h2>Selection</h2>
 <div th:switch="${isActive}">
-    <form action="#" th:action="@{/group-order/selection}" method="post" th:case="${true}">
+    <form action="#" th:action="@{'/restaurant/'+${restaurantId}+'/group-order/selection-create'}" method="post" th:case="${true}">
         <label for="orderItemEmployeeName">Employee Name</label>
         <input type="text" th:field="*{orderItemCreation.orderItemEmployeeName}" id="orderItemEmployeeName"
                name="orderItemEmployeeName">

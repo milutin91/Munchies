@@ -26,7 +26,7 @@
             <td th:text="${restaurant.restaurantPhoneNumber}"></td>
             <td th:text="${restaurant.restaurantMenuUrl}"></td>
             <td><a href="#" th:href="@{'/restaurant-details/'+${restaurant.restaurantId}}">View Details</a></td>
-            <td><a href="#" th:href="@{'/group-order/create/'+${restaurant.restaurantId}}">New Group Order</a></td>
+            <td><a href="#" th:href="@{'/restaurant/'+${restaurant.restaurantId}+'/group-order/create'}">New Group Order</a></td>
         </tr>
     </table>
 </div>

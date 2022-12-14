@@ -23,26 +23,26 @@ public class GroupOrderController {
     OrderItemService orderItemService;
 
     //CREATE (form)
-    @GetMapping("/group-order/create/{id}")
-    public String createOrderForm(@PathVariable("id") Integer id, GroupOrderCreationDTO groupOrderCreationDTO, Model model) {
+    @GetMapping("/restaurant/{restaurantId}/group-order/create")
+    public String createOrderForm(@PathVariable("restaurantId") Integer id, GroupOrderCreationDTO groupOrderCreationDTO, Model model) {
         model.addAttribute("restaurantId", id);
         model.addAttribute("newGroupOrder", groupOrderCreationDTO);
         return "create_group_order";
     }
 
     //CREATE
-    @PostMapping("/group-order/create/{id}")
-    public String createOrder(@PathVariable("id") Integer id,
+    @PostMapping("/restaurant/{restaurantId}/group-order/create")
+    public String createOrder(@PathVariable("restaurantId") Integer id,
                               @ModelAttribute("newGroupOrder") GroupOrderCreationDTO groupOrderCreationDTO,
                               RedirectAttributes redirectAttributes) {
         Integer groupOrderId = groupOrderService.createGroupOrder(id, groupOrderCreationDTO).getGroupOrderId();
         redirectAttributes.addAttribute("groupOrderId", groupOrderId);
-        return "redirect:/group-order/{groupOrderId}";
+        return "redirect:/restaurant/{restaurantId}/group-order/create/{groupOrderId}";
     }
 
     //current group order
-    @GetMapping("/group-order/{groupOrderId}")
-    public String groupOrderPage(OrderItemCreationDTO orderItemCreationDTO, OrderItemDTO orderItemDTO, Model model) {
+    @GetMapping("/restaurant/{restaurantId}/group-order/create/{groupOrderId}")
+    public String groupOrderPage(OrderItemCreationDTO orderItemCreationDTO, Model model) {
         model.addAttribute("groupOrder", groupOrderService.getGroupOrder());
         model.addAttribute("orderItemCreation", orderItemCreationDTO);
         model.addAttribute("orderItemsResponse", orderItemService.getOrderItemSelectionsLastGroupOrderId());

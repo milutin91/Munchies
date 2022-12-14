@@ -33,6 +33,7 @@ public class GroupOrderMapper {
         groupOrderDTO.setGroupOrderTimeout(groupOrderEntity.getGroupOrderTimeout());
         groupOrderDTO.setTimeout(groupOrderEntity.getGroupOrderCreated().plusMinutes(groupOrderEntity.getGroupOrderTimeout()));
         groupOrderDTO.setGroupOrderEmployeeName(groupOrderEntity.getGroupOrderEmployeeName());
+        groupOrderDTO.setRestaurantId(groupOrderEntity.getRestaurantEntity().getRestaurantId());
         groupOrderDTO.setRestaurantName(groupOrderEntity.getRestaurantEntity().getRestaurantName());
         groupOrderDTO.setRestaurantPhoneNumber(groupOrderEntity.getRestaurantEntity().getRestaurantPhoneNumber());
         groupOrderDTO.setRestaurantMenuUrl(groupOrderEntity.getRestaurantEntity().getRestaurantMenuUrl());
