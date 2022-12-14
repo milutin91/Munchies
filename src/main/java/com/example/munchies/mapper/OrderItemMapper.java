@@ -15,19 +15,23 @@ public class OrderItemMapper {
     GroupOrderRepository groupOrderRepository;
     public OrderItemEntity mapOrderItemCreationToEntity(OrderItemCreationDTO orderItemCreationDTO){
         OrderItemEntity orderItemEntity = new OrderItemEntity();
+
         orderItemEntity.setOrderItemEmployeeName(orderItemCreationDTO.getOrderItemEmployeeName());
         orderItemEntity.setOrderItemDescription(orderItemCreationDTO.getOrderItemDescription());
         orderItemEntity.setOrderItemPrice(orderItemCreationDTO.getOrderItemPrice());
         orderItemEntity.setOrderItemCreated(LocalDateTime.now());
         orderItemEntity.setGroupOrderEntity(groupOrderRepository.findTopByOrderByGroupOrderIdDesc());
+
         return orderItemEntity;
     }
 
     public OrderItemDTO mapOrderItemEntityToDto(OrderItemEntity orderItemEntity){
         OrderItemDTO orderItemDTO = new OrderItemDTO();
+
         orderItemDTO.setOrderItemEmployeeName(orderItemEntity.getOrderItemEmployeeName());
         orderItemDTO.setOrderItemDescription(orderItemEntity.getOrderItemDescription());
         orderItemDTO.setOrderItemPrice(orderItemEntity.getOrderItemPrice());
+
         return orderItemDTO;
     }
 }

@@ -20,15 +20,18 @@ public class GroupOrderMapper {
 
     public GroupOrderEntity mapGroupOrderCreationDtoToEntity(Integer id, GroupOrderCreationDTO groupOrderCreationDTO){
         GroupOrderEntity groupOrder = new GroupOrderEntity();
+
         groupOrder.setGroupOrderEmployeeName(groupOrderCreationDTO.getGroupOrderEmployeeName());
         groupOrder.setGroupOrderTimeout(groupOrderCreationDTO.getGroupOrderTimeout());
         groupOrder.setGroupOrderCreated(LocalDateTime.now());
         groupOrder.setRestaurantEntity(restaurantRepository.findById(id).get());
+
         return groupOrder;
     }
 
     public GroupOrderDTO mapGroupOrderEntityToDto(GroupOrderEntity groupOrderEntity) {
         GroupOrderDTO groupOrderDTO = new GroupOrderDTO();
+
         groupOrderDTO.setGroupOrderId(groupOrderEntity.getGroupOrderId());
         groupOrderDTO.setGroupOrderTimeout(groupOrderEntity.getGroupOrderTimeout());
         groupOrderDTO.setTimeout(groupOrderEntity.getGroupOrderCreated().plusMinutes(groupOrderEntity.getGroupOrderTimeout()));
