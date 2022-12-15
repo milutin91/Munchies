@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Order</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
-<body>
-<div align="center">
-    <h1>Create Group Order</h1>
+<body class="bg-light text-secondary">
+<div class="container mt-5">
+    <h1 class="h3 mb-3 fw-normal">Create Group Order</h1>
     <form action="#" th:action="@{'/restaurant/'+${restaurantId}+'/group-order/create'}" method="post">
-        <label for="employeeName">Employee Name</label>
-        <input type="text" th:field="*{newGroupOrder.groupOrderEmployeeName}" id="employeeName"
-               name="employeeFirstName">
+        <label for="employeeName" class="form-label">Employee Name</label>
+        <input type="text" class="form-control" th:field="*{newGroupOrder.groupOrderEmployeeName}" id="employeeName"
+               name="employeeFirstName" placeholder="Enter your name">
         <br>
-        <label for="orderTimeout">Order Timeout</label>
-        <input type="text" th:field="*{newGroupOrder.groupOrderTimeout}" id="orderTimeout" name="orderTimeout">
+        <label for="orderTimeout" class="form-label">Order Timeout</label>
+        <input type="text" class="form-control" th:field="*{newGroupOrder.groupOrderTimeout}" id="orderTimeout"
+               name="orderTimeout" placeholder="Enter order timeout">
         <br>
-        <input type="submit" value="Create Order"/>
+        <input type="submit" class="btn btn-primary mt-3" value="Create Order"/>
     </form>
 </div>
 </body>
