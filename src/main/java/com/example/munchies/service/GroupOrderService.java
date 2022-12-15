@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class GroupOrderService {
@@ -25,17 +23,6 @@ public class GroupOrderService {
         return groupOrderMapper.mapGroupOrderEntityToDto(groupOrderResponse);
     }
 
-    public List<GroupOrderDTO> getAllActiveGroupOrders() {
-        List<GroupOrderEntity> groupOrderEntities = groupOrderRepository.findAll();
-        List<GroupOrderDTO> groupOrderDTOS = new ArrayList<>();
-        for (var groupOrder : groupOrderEntities) {
-            if (groupOrder.getGroupOrderCreated().plusMinutes(groupOrder.getGroupOrderTimeout()).isBefore(LocalDateTime.now())) {
-                groupOrderDTOS.add(groupOrderMapper.mapGroupOrderEntityToDto(groupOrder));
-            }
-        }
-        return groupOrderDTOS;
-    }
-
     public GroupOrderDTO getGroupOrder() {
         return groupOrderMapper.mapGroupOrderEntityToDto(groupOrderRepository.findTopByOrderByGroupOrderIdDesc());
     }
@@ -44,7 +31,7 @@ public class GroupOrderService {
         return !LocalDateTime.now().isAfter(groupOrderDTO.getTimeout());
     }
 
-    public GroupOrderEntity getLatestGroupOrder(){
-        return groupOrderRepository.findTopByOrderByGroupOrderIdDesc();
+    public GroupOrderDTO getLatestGroupOrderDTO(){
+        return groupOrderMapper.mapGroupOrderEntityToDto(groupOrderRepository.findTopByOrderByGroupOrderIdDesc());
     }
 }
