@@ -10,18 +10,16 @@ public class GroupOrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int groupOrderId;
+    private int groupOrderTimeout;
+    private String groupOrderEmployeeName;
     private LocalDateTime groupOrderCreated;
-    private LocalDateTime groupOrderUpdate;
+    private LocalDateTime groupOrderUpdated;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurantEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private EmployeeEntity employeeEntity;
-
-    @OneToMany(mappedBy = "groupOrderEntity")
+    @OneToMany(mappedBy = "groupOrderEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItemEntity> orderItems;
 
     public GroupOrderEntity() {
@@ -35,6 +33,23 @@ public class GroupOrderEntity {
         this.groupOrderId = groupOrderId;
     }
 
+    public int getGroupOrderTimeout() {
+        return groupOrderTimeout;
+    }
+
+    public void setGroupOrderTimeout(int groupOrderTimeout) {
+        this.groupOrderTimeout = groupOrderTimeout;
+    }
+
+
+    public String getGroupOrderEmployeeName() {
+        return groupOrderEmployeeName;
+    }
+
+    public void setGroupOrderEmployeeName(String groupOrderEmployeeName) {
+        this.groupOrderEmployeeName = groupOrderEmployeeName;
+    }
+
     public LocalDateTime getGroupOrderCreated() {
         return groupOrderCreated;
     }
@@ -43,12 +58,12 @@ public class GroupOrderEntity {
         this.groupOrderCreated = groupOrderCreated;
     }
 
-    public LocalDateTime getGroupOrderUpdate() {
-        return groupOrderUpdate;
+    public LocalDateTime getGroupOrderUpdated() {
+        return groupOrderUpdated;
     }
 
-    public void setGroupOrderUpdate(LocalDateTime groupOrderUpdate) {
-        this.groupOrderUpdate = groupOrderUpdate;
+    public void setGroupOrderUpdated(LocalDateTime groupOrderUpdated) {
+        this.groupOrderUpdated = groupOrderUpdated;
     }
 
     public RestaurantEntity getRestaurantEntity() {
@@ -57,14 +72,6 @@ public class GroupOrderEntity {
 
     public void setRestaurantEntity(RestaurantEntity restaurantEntity) {
         this.restaurantEntity = restaurantEntity;
-    }
-
-    public EmployeeEntity getEmployeeEntity() {
-        return employeeEntity;
-    }
-
-    public void setEmployeeEntity(EmployeeEntity employeeEntity) {
-        this.employeeEntity = employeeEntity;
     }
 
     public List<OrderItemEntity> getOrderItems() {
@@ -78,11 +85,13 @@ public class GroupOrderEntity {
     @Override
     public String toString() {
         return "GroupOrderEntity{" +
-                "groupOrderID=" + groupOrderId +
+                "groupOrderId=" + groupOrderId +
+                ", groupOrderTimeout=" + groupOrderTimeout +
+                ", groupOrderEmployeeName='" + groupOrderEmployeeName + '\'' +
                 ", groupOrderCreated=" + groupOrderCreated +
-                ", groupOrderUpdate=" + groupOrderUpdate +
+                ", groupOrderUpdated=" + groupOrderUpdated +
                 ", restaurantEntity=" + restaurantEntity +
-                ", employeeEntity=" + employeeEntity +
+                ", orderItems=" + orderItems +
                 '}';
     }
 }

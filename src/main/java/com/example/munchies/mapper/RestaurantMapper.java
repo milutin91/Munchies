@@ -1,4 +1,4 @@
-package com.example.munchies.service;
+package com.example.munchies.mapper;
 
 import com.example.munchies.model.dto.RestaurantCreationDTO;
 import com.example.munchies.model.dto.RestaurantDTO;
@@ -13,6 +13,7 @@ public class RestaurantMapper {
 
     public RestaurantEntity mapRestaurantCreationDtoToEntities(RestaurantCreationDTO restaurantDTO){
         RestaurantEntity restaurant = new RestaurantEntity();
+
         restaurant.setRestaurantName(restaurantDTO.getRestaurantName());
         restaurant.setRestaurantAddress(restaurantDTO.getRestaurantAddress());
         restaurant.setRestaurantPhoneNumber(restaurantDTO.getRestaurantPhoneNumber());
@@ -20,11 +21,13 @@ public class RestaurantMapper {
         restaurant.setRestaurantShortName(generateShortName(restaurantDTO.getRestaurantName()));
 
         DeliveryInfoEntity deliveryInfo = new DeliveryInfoEntity();
+
         deliveryInfo.setDeliveryInfoTime(restaurantDTO.getDeliveryInfoTime());
         deliveryInfo.setDeliveryInfoAdditionalCharges(restaurantDTO.getDeliveryInfoAdditionalCharges());
 
         restaurant.setDeliveryInfoEntity(deliveryInfo);
         deliveryInfo.setRestaurantEntity(restaurant);
+
         return restaurant;
     }
 
@@ -37,6 +40,7 @@ public class RestaurantMapper {
         restaurantEntity.setRestaurantUpdated(LocalDateTime.now());
 
         DeliveryInfoEntity deliveryInfo = new DeliveryInfoEntity();
+
         deliveryInfo.setRestaurantEntity(restaurantEntity);
         deliveryInfo = restaurantEntity.getDeliveryInfoEntity();
         deliveryInfo.setDeliveryInfoTime(restaurantCreationDTO.getDeliveryInfoTime());
@@ -48,6 +52,7 @@ public class RestaurantMapper {
 
     public RestaurantDTO mapRestaurantEntityToRestaurantDto(RestaurantEntity restaurantEntity){
         RestaurantDTO restaurantDTO = new RestaurantDTO();
+
         restaurantDTO.setRestaurantId(restaurantEntity.getRestaurantId());
         restaurantDTO.setRestaurantName(restaurantEntity.getRestaurantName());
         restaurantDTO.setRestaurantShortName(generateShortName(restaurantEntity.getRestaurantName()));
@@ -58,6 +63,7 @@ public class RestaurantMapper {
         restaurantDTO.setRestaurantUpdated(restaurantEntity.getRestaurantUpdated());
         restaurantDTO.setDeliveryInfoTime(restaurantEntity.getDeliveryInfoEntity().getDeliveryInfoTime());
         restaurantDTO.setDeliveryInfoAdditionalCharges(restaurantEntity.getDeliveryInfoEntity().getDeliveryInfoAdditionalCharges());
+
         return restaurantDTO;
     }
 
