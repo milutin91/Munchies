@@ -3,7 +3,6 @@ package com.example.munchies.mapper;
 import com.example.munchies.model.dto.GroupOrderCreationDTO;
 import com.example.munchies.model.dto.GroupOrderDTO;
 import com.example.munchies.model.entity.GroupOrderEntity;
-import com.example.munchies.repository.GroupOrderRepository;
 import com.example.munchies.repository.RestaurantRepository;
 import com.example.munchies.service.GroupOrderService;
 import com.example.munchies.service.OrderItemService;
@@ -21,7 +20,6 @@ public class GroupOrderMapper {
     GroupOrderService groupOrderService;
     @Autowired
     OrderItemService orderItemService;
-
     public GroupOrderEntity mapGroupOrderCreationDtoToEntity(Integer id, GroupOrderCreationDTO groupOrderCreationDTO){
         GroupOrderEntity groupOrder = new GroupOrderEntity();
 
@@ -44,8 +42,8 @@ public class GroupOrderMapper {
         groupOrderDTO.setRestaurantName(groupOrderEntity.getRestaurantEntity().getRestaurantName());
         groupOrderDTO.setRestaurantPhoneNumber(groupOrderEntity.getRestaurantEntity().getRestaurantPhoneNumber());
         groupOrderDTO.setRestaurantMenuUrl(groupOrderEntity.getRestaurantEntity().getRestaurantMenuUrl());
-        groupOrderDTO.setOrderItemDTOS(orderItemService.getOrderItemSelectionsLastGroupOrderId());
-        groupOrderDTO.setTotal(orderItemService.getTotal(groupOrderDTO.getOrderItemDTOS()));
+        groupOrderDTO.setOrderItemDTOs(orderItemService.getOrderItemDtoList(groupOrderEntity.getOrderItems()));
+        groupOrderDTO.setTotal(orderItemService.getTotal(groupOrderDTO.getOrderItemDTOs(), groupOrderEntity.getGroupOrderId()));
         groupOrderDTO.setActive(groupOrderService.groupOrderIsActive(groupOrderDTO));
 
         return groupOrderDTO;

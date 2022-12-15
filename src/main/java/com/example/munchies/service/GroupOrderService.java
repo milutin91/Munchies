@@ -23,8 +23,8 @@ public class GroupOrderService {
         return groupOrderMapper.mapGroupOrderEntityToDto(groupOrderResponse);
     }
 
-    public GroupOrderDTO getGroupOrder() {
-        return groupOrderMapper.mapGroupOrderEntityToDto(groupOrderRepository.findTopByOrderByGroupOrderIdDesc());
+    public GroupOrderDTO getGroupOrder(Integer groupOrderId) {
+        return groupOrderMapper.mapGroupOrderEntityToDto(groupOrderRepository.findById(groupOrderId).get());
     }
 
     public boolean groupOrderIsActive(GroupOrderDTO groupOrderDTO) {

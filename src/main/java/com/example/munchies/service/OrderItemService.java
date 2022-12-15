@@ -28,29 +28,27 @@ public class OrderItemService {
         return orderItemMapper.mapOrderItemEntityToDto(orderItemResponse);
     }
 
-    public List<OrderItemDTO> getOrderItemSelectionsLastGroupOrderId() {
-        List<OrderItemEntity> orderItemEntities = orderItemRepository.findAll();
-        List<OrderItemDTO> orderItemDTOS = new ArrayList<>();
-        var groupOrder = groupOrderRepository.findTopByOrderByGroupOrderIdDesc();
-
-        for (var orderItem : orderItemEntities) {
-            if (orderItem.getGroupOrderEntity().getGroupOrderId() == groupOrder.getGroupOrderId())
-                orderItemDTOS.add(orderItemMapper.mapOrderItemEntityToDto(orderItem));
-        }
-
-        return orderItemDTOS;
-    }
-
-    public double getTotal(List<OrderItemDTO> orderItemDTOS) {
+    public double getTotal(List<OrderItemDTO> orderItems, Integer groupOrderId) {
         double total = 0;
-        for (var orderItem : orderItemDTOS) {
+        for (var orderItem : orderItems) {
             total += orderItem.getOrderItemPrice();
         }
-        double restaurantAdditionalCharges = groupOrderRepository.findTopByOrderByGroupOrderIdDesc()
+        double restaurantAdditionalCharges = groupOrderRepository.findById(groupOrderId).get()
                 .getRestaurantEntity()
                 .getDeliveryInfoEntity()
                 .getDeliveryInfoAdditionalCharges();
         total += restaurantAdditionalCharges;
         return total;
+    }
+
+    public List<OrderItemDTO> getOrderItemDtoList(List<OrderItemEntity> orderItemEntityList) {
+        List<OrderItemDTO> orderItemDTOList = new ArrayList<>();
+        if (orderItemEntityList == null) {
+            return orderItemDTOList;
+        }
+        for (var orderItemEntity : orderItemEntityList) {
+            orderItemDTOList.add(orderItemMapper.mapOrderItemEntityToDto(orderItemEntity));
+        }
+        return orderItemDTOList;
     }
 }

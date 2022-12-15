@@ -17,12 +17,11 @@ public class OrderItemController {
     @Autowired
     GroupOrderService groupOrderService;
 
-    @PostMapping("/restaurant/{restaurantId}/group-order/selection-create")
+    @PostMapping("/restaurant/group-order/selection-create")
     public String createEmployeeSelection(OrderItemCreationDTO orderItemCreationDTO, RedirectAttributes redirectAttributes){
         orderItemService.createEmployeeSelection(orderItemCreationDTO);
         GroupOrderDTO groupOrderDTO = groupOrderService.getLatestGroupOrderDTO();
         redirectAttributes.addAttribute("groupOrderId", groupOrderDTO.getGroupOrderId());
-        redirectAttributes.addAttribute("groupOrderRestaurantId", groupOrderDTO.getRestaurantId());
-        return "redirect:/restaurant/{groupOrderRestaurantId}/group-order/create/{groupOrderId}";
+        return "redirect:/restaurant/group-order/{groupOrderId}";
     }
 }

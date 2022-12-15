@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class OrderItemMapper {
@@ -31,7 +33,6 @@ public class OrderItemMapper {
         orderItemDTO.setOrderItemEmployeeName(orderItemEntity.getOrderItemEmployeeName());
         orderItemDTO.setOrderItemDescription(orderItemEntity.getOrderItemDescription());
         orderItemDTO.setOrderItemPrice(orderItemEntity.getOrderItemPrice());
-        orderItemDTO.setGroupOrderEntity(orderItemEntity.getGroupOrderEntity());
 
         return orderItemDTO;
     }
