@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body class="bg-light text-dark">
+<input type="hidden" th:value="*{groupOrder.groupOrderId}" id="id" class="id"/>
 <div class="container mt-5">
     <h1 class="text-secondary">Group Order</h1>
 </div>
@@ -63,8 +64,9 @@
         </div>
         <br>
         <div class="col">
+<!--            <input type="hidden" th:value="*{groupOrder.groupOrderId}" id="id" class="id"/>-->
             <h2 class="text-secondary">Table of All Selections</h2>
-            <table class="table table-hover w-100 p-3">
+            <table id="selectionTable" th:fragment="selectionTable" class="table table-hover w-100 p-3">
                 <tr class="table-primary h6 text-secondary">
                     <td>Employee Name</td>
                     <td>Item Name</td>
@@ -84,5 +86,20 @@
         </div>
     </div>
 </div>
+<script>
+    function reload() {
+    let id = $("#id").val();
+    const url = '/reload-selection/'+ id;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (data) {
+            $("#selectionTable").html(data);
+            console.log(data);
+        }
+    });
+}
+setInterval(reload, 2000);
+</script>
 </body>
 </html>

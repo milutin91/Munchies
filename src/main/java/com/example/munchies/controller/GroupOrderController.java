@@ -43,4 +43,10 @@ public class GroupOrderController {
         model.addAttribute("orderItemCreation", orderItemCreationDTO);
         return "group_order";
     }
+
+        @GetMapping("/reload-selection/{groupOrderId}")
+    public String reloadSelectionTable(@PathVariable("groupOrderId") Integer groupOrderId, Model model){
+        model.addAttribute("groupOrder", groupOrderService.getGroupOrder(groupOrderId));
+        return "group_order :: selectionTable";
+    }
 }
