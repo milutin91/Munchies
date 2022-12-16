@@ -13,7 +13,7 @@ public class GroupOrderDTO {
     private String restaurantName;
     private String restaurantPhoneNumber;
     private String restaurantMenuUrl;
-    private List<OrderItemDTO> orderItemDTOS;
+    private List<OrderItemDTO> orderItemDTOs;
     private double total;
 
     public GroupOrderDTO() {
@@ -91,12 +91,12 @@ public class GroupOrderDTO {
         this.restaurantMenuUrl = restaurantMenuUrl;
     }
 
-    public List<OrderItemDTO> getOrderItemDTOS() {
-        return orderItemDTOS;
+    public List<OrderItemDTO> getOrderItemDTOs() {
+        return orderItemDTOs;
     }
 
-    public void setOrderItemDTOS(List<OrderItemDTO> orderItemEntities) {
-        this.orderItemDTOS = orderItemEntities;
+    public void setOrderItemDTOs(List<OrderItemDTO> orderItemDTOs) {
+        this.orderItemDTOs = orderItemDTOs;
     }
 
     public double getTotal() {

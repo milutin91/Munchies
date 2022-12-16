@@ -33,14 +33,20 @@ public class GroupOrderController {
                               RedirectAttributes redirectAttributes) {
         Integer groupOrderId = groupOrderService.createGroupOrder(id, groupOrderCreationDTO).getGroupOrderId();
         redirectAttributes.addAttribute("groupOrderId", groupOrderId);
-        return "redirect:/restaurant/{restaurantId}/group-order/create/{groupOrderId}";
+        return "redirect:/restaurant/group-order/{groupOrderId}";
     }
 
     //current group order
-    @GetMapping("/restaurant/{restaurantId}/group-order/create/{groupOrderId}")
-    public String groupOrderPage(OrderItemCreationDTO orderItemCreationDTO, Model model) {
-        model.addAttribute("groupOrder", groupOrderService.getGroupOrder());
+    @GetMapping("/restaurant/group-order/{groupOrderId}")
+    public String groupOrderPage(@PathVariable("groupOrderId") Integer id, OrderItemCreationDTO orderItemCreationDTO, Model model) {
+        model.addAttribute("groupOrder", groupOrderService.getGroupOrder(id));
         model.addAttribute("orderItemCreation", orderItemCreationDTO);
         return "group_order";
+    }
+
+        @GetMapping("/reload-selection/{groupOrderId}")
+    public String reloadSelectionTable(@PathVariable("groupOrderId") Integer groupOrderId, Model model){
+        model.addAttribute("groupOrder", groupOrderService.getGroupOrder(groupOrderId));
+        return "group_order :: selectionTable";
     }
 }
