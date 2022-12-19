@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:www.thymeleaf.org">
+<html lang="en" xmlns:th="http:www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Munchies</title>
@@ -7,6 +7,11 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body class="bg-light text-dark">
+<div class="container" align="right">
+    <form name="logoutForm" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+        <input type="submit" class="btn btn-outline-danger btn-sm btn-block mt-3" value="Sign Out"/>
+    </form>
+</div>
 <div align="center" style="margin-top: 40px">
     <br>
     <h1 class="text-secondary">Restaurant List</h1>
@@ -19,7 +24,7 @@
             <td>Phone</td>
             <td>Menu URL</td>
             <td>Details</td>
-            <td>New Group Order</td>
+            <td sec:authorize="isAnonymous()">New Group Order</td>
         </tr>
         <tr th:each="restaurant : ${restaurants}">
             <td th:text="${restaurant.restaurantName}"></td>
@@ -28,7 +33,7 @@
             <td th:text="${restaurant.restaurantPhoneNumber}"></td>
             <td th:text="${restaurant.restaurantMenuUrl}"></td>
             <td><a href="#" th:href="@{'/restaurant-details/'+${restaurant.restaurantId}}" class="btn btn-info btn-sm">View Details</a></td>
-            <td><a href="#" th:href="@{'/restaurant/'+${restaurant.restaurantId}+'/group-order/create'}" class="btn btn-success btn-sm">New Group Order</a></td>
+            <td sec:authorize="isAnonymous()"><a href="#" th:href="@{'/restaurant/'+${restaurant.restaurantId}+'/group-order/create'}" class="btn btn-success btn-sm">New Group Order</a></td>
         </tr>
     </table>
 </div>

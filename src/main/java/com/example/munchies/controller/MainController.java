@@ -2,18 +2,27 @@ package com.example.munchies.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MainController {
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login() {
-        return "login.html";
+        return "login";
     }
 
-    @GetMapping("/index")
+    @PostMapping("/logout")
+    public String logout() {
+        return "redirect:/home";
+    }
+
+    @GetMapping("/")
     public String index(){
         return "index";
     }
 
+    @GetMapping("/home")
+    public String home(){
+        return "home";
+    }
 }
