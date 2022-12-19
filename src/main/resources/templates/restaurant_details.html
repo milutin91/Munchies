@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:www.thymeleaf.org">
+<html lang="en" xmlns:th="http:www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Munchies</title>
@@ -7,6 +7,11 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body class="bg-light text-dark">
+<div class="container" align="right">
+    <form name="logoutForm" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+        <input type="submit" class="btn btn-outline-danger btn-sm btn-block mt-3" value="Sign Out"/>
+    </form>
+</div>
 <div align="center" class="mt-5">
     <h1 class="text-secondary">Restaurant Details</h1>
     <br>
@@ -34,7 +39,7 @@
             <td th:text="${restaurantDetails.deliveryInfoAdditionalCharges}"></td>
         </tr>
     </table>
-    <div class="mt-5">
+    <div class="mt-5" sec:authorize="isAuthenticated()">
         <a href="#" th:href="@{'/restaurant/update.form/'+${restaurantDetails.restaurantId}}" class="btn btn-primary btn-md btn-block w-25 mb-3">Update</a> <br>
         <a href="#" th:href="@{'/restaurant-delete/'+${restaurantDetails.restaurantId}}" class="btn btn-danger btn-md btn-block w-25">Delete</a>
     </div>

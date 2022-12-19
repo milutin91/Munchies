@@ -9,16 +9,22 @@
 <body class="bg-light text-dark">
 <br>
 <div style="margin:150px 100px 250px 100px">
-    <div class="d-flex justify-content-center text-secondary" style="margin:50px;">
-        <h1 class="display-1">Welcome To Munchies</h1>
-    </div>
-    <br>
-    <div class="d-flex justify-content-center">
-        <a href="#" th:href="@{/restaurant/add}" class="btn btn-primary btn-lg btn-block">Add New Restaurant</a>
-    </div>
-    <br>
-    <div class="d-flex justify-content-center">
-        <a href="#" th:href="@{/restaurant/all}" class="btn btn-primary btn-lg btn-block">View All Restaurants</a>
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-center text-secondary" style="margin:50px;">
+                <h1 class="display-1 w-75">Welcome To <span class="text-primary text-uppercase">Munchies</span></h1>
+            </div>
+        </div>
+        <br>
+        <div class="col mt-5">
+            <div class="d-flex justify-content-center mt-4">
+                <a href="#" th:href="@{/home}" class="btn btn-primary btn-lg btn-block w-75">Employee portal</a>
+            </div>
+            <div class="d-flex justify-content-center mt-5">
+                <a href="#" th:href="@{/login}" class="btn btn-outline-primary btn-lg btn-block w-75">Admin portal</a>
+            </div>
+            <br>
+        </div>
     </div>
 </div>
 </body>
