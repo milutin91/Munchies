@@ -6,11 +6,14 @@ import com.example.munchies.service.GroupOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 public class GroupOrderController {
@@ -29,8 +32,11 @@ public class GroupOrderController {
     //CREATE
     @PostMapping("/restaurant/{restaurantId}/group-order/create")
     public String createOrder(@PathVariable("restaurantId") Integer id,
-                              @ModelAttribute("newGroupOrder") GroupOrderCreationDTO groupOrderCreationDTO,
+                              @ModelAttribute("newGroupOrder") @Valid GroupOrderCreationDTO groupOrderCreationDTO, BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) {
+        if(bindingResult.hasErrors()){
+            return "create_group_order";
+        }
         Integer groupOrderId = groupOrderService.createGroupOrder(id, groupOrderCreationDTO).getGroupOrderId();
         redirectAttributes.addAttribute("groupOrderId", groupOrderId);
         return "redirect:/restaurant/group-order/{groupOrderId}";

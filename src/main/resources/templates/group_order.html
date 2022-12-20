@@ -47,16 +47,22 @@
                 <input type="text" class="form-control w-75" th:field="*{orderItemCreation.orderItemEmployeeName}"
                        id="orderItemEmployeeName"
                        name="orderItemEmployeeName">
+                <p th:if="${#fields.hasErrors('orderItemCreation.orderItemEmployeeName')}"
+                   th:errors="*{orderItemCreation.orderItemEmployeeName}" class="alert alert-warning w-50 mt-2"></p>
                 <br>
                 <label for="orderItemDescription" class="form-label">Item Name</label>
                 <input type="text" class="form-control w-75" th:field="*{orderItemCreation.orderItemDescription}"
                        id="orderItemDescription"
                        name="orderItemDescription">
+                <p th:if="${#fields.hasErrors('orderItemCreation.orderItemDescription')}"
+                   th:errors="*{orderItemCreation.orderItemDescription}" class="alert alert-warning w-50 mt-2"></p>
                 <br>
                 <label for="orderItemPrice" class="form-label">Item Price</label>
                 <input type="text" class="form-control w-75" th:field="*{orderItemCreation.orderItemPrice}"
                        id="orderItemPrice"
                        name="orderItemPrice">
+                <p th:if="${#fields.hasErrors('orderItemCreation.orderItemPrice')}"
+                   th:errors="*{orderItemCreation.orderItemPrice}" class="alert alert-warning w-50 mt-2"></p>
                 <br>
                 <input type="submit" class="btn btn-primary" value="Create Selection"/>
             </form>

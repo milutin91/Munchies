@@ -13,10 +13,14 @@
         <label for="employeeName" class="form-label">Employee Name</label>
         <input type="text" class="form-control" th:field="*{newGroupOrder.groupOrderEmployeeName}" id="employeeName"
                name="employeeFirstName" placeholder="Enter your name">
+        <p th:if="${#fields.hasErrors('newGroupOrder.groupOrderEmployeeName')}"
+           th:errors="*{newGroupOrder.groupOrderEmployeeName}" class="alert alert-warning w-50 mt-2"></p>
         <br>
         <label for="orderTimeout" class="form-label">Order Timeout</label>
         <input type="text" class="form-control" th:field="*{newGroupOrder.groupOrderTimeout}" id="orderTimeout"
                name="orderTimeout" placeholder="Enter order timeout">
+        <p th:if="${#fields.hasErrors('newGroupOrder.groupOrderTimeout')}"
+           th:errors="*{newGroupOrder.groupOrderTimeout}" class="alert alert-warning w-50 mt-2"></p>
         <br>
         <input type="submit" class="btn btn-primary mt-3" value="Create Order"/>
     </form>
