@@ -14,4 +14,11 @@ public class ExceptionHandling {
         model.addAttribute("error410", groupOrderTimeoutException.getMessage());
         return "order_timeout_410";
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(GroupOrderDoesntExistException.class)
+    public String handleGroupOrderDoesntExistException(GroupOrderDoesntExistException groupOrderDoesntExistException, Model model){
+        model.addAttribute("error404", groupOrderDoesntExistException.getMessage());
+        return "order_not_exist_404";
+    }
 }
