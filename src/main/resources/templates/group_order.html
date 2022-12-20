@@ -40,7 +40,7 @@
     <div class="row">
         <div th:switch="${groupOrder.isActive}" class="col">
             <h2 class="text-secondary">Selection</h2>
-            <form action="#" th:action="@{/restaurant/group-order/selection-create}"
+            <form action="#" th:action="@{'/restaurant/group-order/'+${groupOrder.groupOrderId}+'/selection'}"
                   method="post"
                   th:case="${true}">
                 <label for="orderItemEmployeeName" class="form-label">Employee Name</label>
