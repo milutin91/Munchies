@@ -1,6 +1,6 @@
 package com.example.munchies.service;
 
-import com.example.munchies.ExceptionHandling.GroupOrderDoesntExistException;
+import com.example.munchies.ExceptionHandling.NotFoundException;
 import com.example.munchies.ExceptionHandling.GroupOrderTimeoutException;
 import com.example.munchies.mapper.GroupOrderMapper;
 import com.example.munchies.model.dto.GroupOrderCreationDTO;
@@ -19,17 +19,15 @@ public class GroupOrderService {
     @Autowired
     GroupOrderMapper groupOrderMapper;
 
-    public GroupOrderDTO createGroupOrder(Integer id, GroupOrderCreationDTO groupOrderCreationDTO) {
+    public GroupOrderDTO createGroupOrder(Integer id, GroupOrderCreationDTO groupOrderCreationDTO) throws NotFoundException {
         GroupOrderEntity groupOrder = groupOrderMapper.mapGroupOrderCreationDtoToEntity(id, groupOrderCreationDTO);
         GroupOrderEntity groupOrderResponse = groupOrderRepository.save(groupOrder);
         return groupOrderMapper.mapGroupOrderEntityToDto(groupOrderResponse);
     }
 
-    public GroupOrderDTO getGroupOrder(Integer groupOrderId) throws GroupOrderTimeoutException, GroupOrderDoesntExistException {
-        if (!groupOrderRepository.existsById(groupOrderId)) {
-            throw new GroupOrderDoesntExistException("Group order doesn't exist");
-        }
-        GroupOrderDTO groupOrderDTO = groupOrderMapper.mapGroupOrderEntityToDto(groupOrderRepository.findById(groupOrderId).get());
+    public GroupOrderDTO getGroupOrder(Integer groupOrderId) throws GroupOrderTimeoutException, NotFoundException {
+        GroupOrderDTO groupOrderDTO = groupOrderMapper.mapGroupOrderEntityToDto(groupOrderRepository.findById(groupOrderId)
+                .orElseThrow(() -> new NotFoundException("Group order doesn't exist")));
         if (!groupOrderDTO.isActive()) throw new GroupOrderTimeoutException("Time is up for this group order");
         return groupOrderDTO;
     }

@@ -1,5 +1,6 @@
 package com.example.munchies.service;
 
+import com.example.munchies.ExceptionHandling.NotFoundException;
 import com.example.munchies.mapper.RestaurantMapper;
 import com.example.munchies.model.dto.RestaurantCreationDTO;
 import com.example.munchies.model.dto.RestaurantDTO;
@@ -33,8 +34,9 @@ public class RestaurantService {
         return restaurantDTOS;
     }
 
-    public RestaurantDTO findRestaurantDetails(Integer id) {
-        RestaurantEntity restaurant = restaurantRepository.findById(id).get();
+    public RestaurantDTO findRestaurantDetails(Integer id) throws NotFoundException {
+        RestaurantEntity restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Restaurant doesn't exist"));
 
         return restaurantMapper.mapRestaurantEntityToRestaurantDto(restaurant);
     }

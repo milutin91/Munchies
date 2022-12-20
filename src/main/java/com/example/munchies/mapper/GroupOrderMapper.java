@@ -1,5 +1,6 @@
 package com.example.munchies.mapper;
 
+import com.example.munchies.ExceptionHandling.NotFoundException;
 import com.example.munchies.model.dto.GroupOrderCreationDTO;
 import com.example.munchies.model.dto.GroupOrderDTO;
 import com.example.munchies.model.entity.GroupOrderEntity;
@@ -20,13 +21,14 @@ public class GroupOrderMapper {
     GroupOrderService groupOrderService;
     @Autowired
     OrderItemService orderItemService;
-    public GroupOrderEntity mapGroupOrderCreationDtoToEntity(Integer id, GroupOrderCreationDTO groupOrderCreationDTO){
+    public GroupOrderEntity mapGroupOrderCreationDtoToEntity(Integer id, GroupOrderCreationDTO groupOrderCreationDTO) throws NotFoundException {
         GroupOrderEntity groupOrder = new GroupOrderEntity();
 
         groupOrder.setGroupOrderEmployeeName(groupOrderCreationDTO.getGroupOrderEmployeeName());
         groupOrder.setGroupOrderTimeout(groupOrderCreationDTO.getGroupOrderTimeout());
         groupOrder.setGroupOrderCreated(LocalDateTime.now());
-        groupOrder.setRestaurantEntity(restaurantRepository.findById(id).get());
+        groupOrder.setRestaurantEntity(restaurantRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Cannot create order, restaurant doesn't exist")));
 
         return groupOrder;
     }

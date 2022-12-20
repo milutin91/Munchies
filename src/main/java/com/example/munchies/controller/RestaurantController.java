@@ -1,5 +1,6 @@
 package com.example.munchies.controller;
 
+import com.example.munchies.ExceptionHandling.NotFoundException;
 import com.example.munchies.model.dto.RestaurantCreationDTO;
 import com.example.munchies.model.dto.RestaurantDTO;
 import com.example.munchies.service.RestaurantService;
@@ -44,7 +45,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/restaurant-details/{id}")
-    public String getRestaurantDetails(@PathVariable("id") Integer id, Model model){
+    public String getRestaurantDetails(@PathVariable("id") Integer id, Model model) throws NotFoundException {
         RestaurantDTO restaurantDto = restaurantService.findRestaurantDetails(id);
         model.addAttribute("restaurantDetails", restaurantDto);
         return "restaurant_details";
@@ -68,7 +69,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/restaurant/update.form/{id}")
-    public String updateForm(@PathVariable("id") Integer id, Model model, RestaurantCreationDTO restaurantDTO) {
+    public String updateForm(@PathVariable("id") Integer id, Model model, RestaurantCreationDTO restaurantDTO) throws NotFoundException {
         model.addAttribute("id", id);
         model.addAttribute("updateRestaurant", restaurantDTO);
         model.addAttribute("updateRestaurant", restaurantService.findRestaurantDetails(id));

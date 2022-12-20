@@ -1,6 +1,6 @@
 package com.example.munchies.controller;
 
-import com.example.munchies.ExceptionHandling.GroupOrderDoesntExistException;
+import com.example.munchies.ExceptionHandling.NotFoundException;
 import com.example.munchies.ExceptionHandling.GroupOrderTimeoutException;
 import com.example.munchies.model.dto.GroupOrderCreationDTO;
 import com.example.munchies.model.dto.OrderItemCreationDTO;
@@ -35,7 +35,7 @@ public class GroupOrderController {
     @PostMapping("/restaurant/{restaurantId}/group-order/create")
     public String createOrder(@PathVariable("restaurantId") Integer id,
                               @ModelAttribute("newGroupOrder") @Valid GroupOrderCreationDTO groupOrderCreationDTO, BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes) throws NotFoundException {
         if(bindingResult.hasErrors()){
             return "create_group_order";
         }
@@ -46,14 +46,14 @@ public class GroupOrderController {
 
     //current group order
     @GetMapping("/restaurant/group-order/{groupOrderId}")
-    public String groupOrderPage(@PathVariable("groupOrderId") Integer id, OrderItemCreationDTO orderItemCreationDTO, Model model) throws GroupOrderTimeoutException, GroupOrderDoesntExistException {
+    public String groupOrderPage(@PathVariable("groupOrderId") Integer id, OrderItemCreationDTO orderItemCreationDTO, Model model) throws GroupOrderTimeoutException, NotFoundException {
         model.addAttribute("groupOrder", groupOrderService.getGroupOrder(id));
         model.addAttribute("orderItemCreation", orderItemCreationDTO);
         return "group_order";
     }
 
         @GetMapping("/reload-selection/{groupOrderId}")
-    public String reloadSelectionTable(@PathVariable("groupOrderId") Integer groupOrderId, Model model) throws GroupOrderTimeoutException, GroupOrderDoesntExistException {
+    public String reloadSelectionTable(@PathVariable("groupOrderId") Integer groupOrderId, Model model) throws GroupOrderTimeoutException, NotFoundException {
         model.addAttribute("groupOrder", groupOrderService.getGroupOrder(groupOrderId));
         return "group_order :: selectionTable";
     }
