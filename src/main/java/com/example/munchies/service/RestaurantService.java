@@ -45,8 +45,9 @@ public class RestaurantService {
         restaurantRepository.deleteById(id);
     }
 
-    public RestaurantDTO updateRestaurant(Integer id, RestaurantCreationDTO restaurantDTO) {
-        RestaurantEntity restaurantToUpdate = restaurantRepository.findById(id).get();
+    public RestaurantDTO updateRestaurant(Integer id, RestaurantCreationDTO restaurantDTO) throws NotFoundException {
+        RestaurantEntity restaurantToUpdate = restaurantRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Restaurant doesn't exist"));
         restaurantToUpdate = restaurantMapper.mapRestaurantUpdateDtoToEntities(restaurantToUpdate, restaurantDTO);
         RestaurantEntity restaurantResponse = restaurantRepository.save(restaurantToUpdate);
         return restaurantMapper.mapRestaurantEntityToRestaurantDto(restaurantResponse);

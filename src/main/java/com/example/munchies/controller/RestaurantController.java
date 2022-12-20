@@ -60,7 +60,7 @@ public class RestaurantController {
     @PostMapping("/restaurant-update/{id}")
     public String updateRestaurant(@PathVariable("id") Integer id,
                                    @ModelAttribute("updateRestaurant") @Valid RestaurantCreationDTO restaurantDTO,
-                                   BindingResult result1){
+                                   BindingResult result1) throws NotFoundException {
         if(result1.hasErrors()){
             return "update_restaurant";
         }
