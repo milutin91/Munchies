@@ -1,5 +1,6 @@
 package com.example.munchies.controller;
 
+import com.example.munchies.ExceptionHandling.GroupOrderTimeoutException;
 import com.example.munchies.model.dto.GroupOrderCreationDTO;
 import com.example.munchies.model.dto.OrderItemCreationDTO;
 import com.example.munchies.service.GroupOrderService;
@@ -44,14 +45,14 @@ public class GroupOrderController {
 
     //current group order
     @GetMapping("/restaurant/group-order/{groupOrderId}")
-    public String groupOrderPage(@PathVariable("groupOrderId") Integer id, OrderItemCreationDTO orderItemCreationDTO, Model model) {
+    public String groupOrderPage(@PathVariable("groupOrderId") Integer id, OrderItemCreationDTO orderItemCreationDTO, Model model) throws GroupOrderTimeoutException {
         model.addAttribute("groupOrder", groupOrderService.getGroupOrder(id));
         model.addAttribute("orderItemCreation", orderItemCreationDTO);
         return "group_order";
     }
 
         @GetMapping("/reload-selection/{groupOrderId}")
-    public String reloadSelectionTable(@PathVariable("groupOrderId") Integer groupOrderId, Model model){
+    public String reloadSelectionTable(@PathVariable("groupOrderId") Integer groupOrderId, Model model) throws GroupOrderTimeoutException {
         model.addAttribute("groupOrder", groupOrderService.getGroupOrder(groupOrderId));
         return "group_order :: selectionTable";
     }
