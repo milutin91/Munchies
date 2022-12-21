@@ -1,6 +1,7 @@
 package com.example.munchies.controller;
 
 import com.example.munchies.ExceptionHandling.NotFoundException;
+import com.example.munchies.ExceptionHandling.RestaurantWithActiveOrderException;
 import com.example.munchies.model.dto.RestaurantCreationDTO;
 import com.example.munchies.model.dto.RestaurantDTO;
 import com.example.munchies.service.RestaurantService;
@@ -52,7 +53,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/restaurant-delete/{id}")
-    public String deleteRestaurant(@PathVariable("id") Integer id){
+    public String deleteRestaurant(@PathVariable("id") Integer id) throws RestaurantWithActiveOrderException, NotFoundException {
         restaurantService.deleteRestaurant(id);
         return "redirect:/restaurant/all";
     }

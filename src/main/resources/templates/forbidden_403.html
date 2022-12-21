@@ -8,10 +8,11 @@
 </head>
 <body class="d-flex justify-content-center">
 <div class="container">
-    <div class="row d-flex justify-content-center">
-        <h2 class="display-1 d-flex justify-content-center" >404</h2>
-        <p class="display-6 d-flex justify-content-center" th:text="${error404}"></p>
-        <a class="btn btn-lg btn-outline-success w-50" th:href="@{/home}">Go to home page</a>
+    <div class="row d-flex justify-content-center"
+         >
+        <h2 class="display-1 d-flex justify-content-center" >403</h2>
+        <p class="display-6 d-flex justify-content-center" th:text="${error403}"></p>
+        <a class="btn btn-lg btn-outline-success w-50" th:href="@{/restaurant/all}">See list of restaurants</a>
     </div>
 </div>
 </body>

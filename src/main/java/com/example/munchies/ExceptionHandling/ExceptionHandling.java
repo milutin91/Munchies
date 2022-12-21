@@ -21,4 +21,11 @@ public class ExceptionHandling {
         model.addAttribute("error404", notFoundException.getMessage());
         return "not_found_404";
     }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(RestaurantWithActiveOrderException.class)
+    public String handleDeleteRestaurantWithActiveOrder(RestaurantWithActiveOrderException restaurantWithActiveOrderException, Model model){
+        model.addAttribute("error403", restaurantWithActiveOrderException.getMessage());
+        return "forbidden_403";
+    }
 }

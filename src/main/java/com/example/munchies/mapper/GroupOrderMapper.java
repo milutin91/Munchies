@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -61,5 +62,12 @@ public class GroupOrderMapper {
 
     public boolean groupOrderIsActive(GroupOrderDTO groupOrderDTO) {
         return !LocalDateTime.now().isAfter(groupOrderDTO.getTimeout());
+    }
+    public List<GroupOrderDTO> mapGroupOrderEntityListToDtoList(List<GroupOrderEntity> groupOrders){
+        List<GroupOrderDTO> groupOrderDTOS = new ArrayList<>();
+        for(var groupOrder : groupOrders){
+            groupOrderDTOS.add(mapGroupOrderEntityToDto(groupOrder));
+        }
+        return groupOrderDTOS;
     }
 }
