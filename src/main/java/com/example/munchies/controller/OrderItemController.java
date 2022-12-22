@@ -32,12 +32,12 @@ public class OrderItemController {
                                           RedirectAttributes redirectAttributes,
                                           Model model) throws GroupOrderTimeoutException, NotFoundException {
         GroupOrderDTO groupOrderDTO = groupOrderService.getGroupOrder(id);
-        redirectAttributes.addAttribute("groupOrderId", groupOrderDTO.getGroupOrderId());
         if (bindingResult.hasErrors()) {
             model.addAttribute("groupOrder", groupOrderDTO);
             model.addAttribute("orderItemCreation", orderItemCreationDTO);
             return "group_order";
         }
+        redirectAttributes.addAttribute("groupOrderId", groupOrderDTO.getGroupOrderId());
         orderItemService.createEmployeeSelection(id, orderItemCreationDTO);
         return "redirect:/restaurant/group-order/{groupOrderId}";
     }
