@@ -1,5 +1,7 @@
 package com.example.munchies.controller;
 
+import com.example.munchies.ExceptionHandling.NotFoundException;
+import com.example.munchies.ExceptionHandling.RestaurantWithActiveOrderException;
 import com.example.munchies.model.dto.RestaurantCreationDTO;
 import com.example.munchies.model.dto.RestaurantDTO;
 import com.example.munchies.service.RestaurantService;
@@ -44,14 +46,14 @@ public class RestaurantController {
     }
 
     @GetMapping("/restaurant-details/{id}")
-    public String getRestaurantDetails(@PathVariable("id") Integer id, Model model){
+    public String getRestaurantDetails(@PathVariable("id") Integer id, Model model) throws NotFoundException {
         RestaurantDTO restaurantDto = restaurantService.findRestaurantDetails(id);
         model.addAttribute("restaurantDetails", restaurantDto);
         return "restaurant_details";
     }
 
     @GetMapping("/restaurant-delete/{id}")
-    public String deleteRestaurant(@PathVariable("id") Integer id){
+    public String deleteRestaurant(@PathVariable("id") Integer id) throws RestaurantWithActiveOrderException, NotFoundException {
         restaurantService.deleteRestaurant(id);
         return "redirect:/restaurant/all";
     }
@@ -59,7 +61,7 @@ public class RestaurantController {
     @PostMapping("/restaurant-update/{id}")
     public String updateRestaurant(@PathVariable("id") Integer id,
                                    @ModelAttribute("updateRestaurant") @Valid RestaurantCreationDTO restaurantDTO,
-                                   BindingResult result1){
+                                   BindingResult result1) throws NotFoundException {
         if(result1.hasErrors()){
             return "update_restaurant";
         }
@@ -68,7 +70,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/restaurant/update.form/{id}")
-    public String updateForm(@PathVariable("id") Integer id, Model model, RestaurantCreationDTO restaurantDTO) {
+    public String updateForm(@PathVariable("id") Integer id, Model model, RestaurantCreationDTO restaurantDTO) throws NotFoundException {
         model.addAttribute("id", id);
         model.addAttribute("updateRestaurant", restaurantDTO);
         model.addAttribute("updateRestaurant", restaurantService.findRestaurantDetails(id));
